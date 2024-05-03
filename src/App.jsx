@@ -1,5 +1,4 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import MyDecksStudent from "./Student/MyDecks/MyDecks";
 import MyDecks from "./Common/MyDecks/MyDecks";
 import DeckStudy from "./Student/MyDecks/DeckStudy/DeckStudy";
 import Student from "./Student/Student";
@@ -16,7 +15,7 @@ export default function App() {
         <SideBar />
         <Routes>
           <Route path="/student" element={<Student />}>
-            <Route path="my-decks" element={<MyDecksStudent />} />
+            <Route path="my-decks" element={<MyDecks isTeacher={false} />} />
             <Route index element={<Navigate to="my-decks" />} />
             <Route end path={`my-decks/:deckId`} element={<DeckStudy />} />
           </Route>

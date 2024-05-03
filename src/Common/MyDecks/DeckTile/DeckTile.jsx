@@ -1,4 +1,4 @@
-import React, from "react";
+import React from "react";
 import "./DeckTile.scss";
 import { NavLink } from "react-router-dom";
 
