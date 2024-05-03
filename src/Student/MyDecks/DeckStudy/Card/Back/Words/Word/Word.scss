@@ -1,0 +1,15 @@
+.word-row {
+  strong {
+    text-transform: capitalize;
+  }
+}
+.image-container {
+  width: 500px;
+  height: 500px;
+
+  .word-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}

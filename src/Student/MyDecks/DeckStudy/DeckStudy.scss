@@ -1,0 +1,72 @@
+@import "../../../mixin";
+
+.deck-modal {
+  background-color: var(--white);
+  border-radius: 1.5rem;
+  padding: 2rem;
+
+  p {
+    font-size: 2rem;
+  }
+
+  .box {
+    .sub-section-content {
+      text-align: center;
+
+      p {
+        padding: 1rem;
+      }
+
+      .image-sub-section {
+        img {
+          width: 70%;
+          background-size: cover;
+        }
+      }
+    }
+    input {
+      margin-top: 5rem;
+      padding: 2rem;
+      // width: 70%;
+      height: 5rem;
+      font-size: 2rem;
+      border-radius: 0.5rem;
+      border: var(--border);
+    }
+  }
+
+  .view-answer {
+    display: flex;
+    justify-content: center;
+  }
+
+  .memorize-option-container {
+    padding: 2rem;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+
+    .memorize-option {
+      margin-right: 1rem;
+
+      .memorize-back {
+        display: none;
+      }
+
+      &:hover {
+        .memorize-front {
+          display: none;
+        }
+
+        .memorize-back {
+          display: block;
+        }
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+}

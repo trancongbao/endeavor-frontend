@@ -1,0 +1,549 @@
+{
+  "myDecks": [
+    {
+      "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "title": "School",
+      "subDecks": [
+        {
+          "id": "eddfb429-d46b-4afb-bc58-afb18a632363",
+          "title": "Introduction",
+          "chapter": 0,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "a3bd90f3-6fb4-438f-a0a7-208289ebb5ae",
+          "title": "What is a city?",
+          "chapter": 1,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "259533fc-bae5-4009-9db0-0606514081ca",
+          "title": "Buildings",
+          "chapter": 2,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "9bbec16e-52e8-4ada-b6e0-c22285a1170f",
+          "title": "Water",
+          "chapter": 3,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "7d3164bc-b1d6-4f3a-a6eb-9490589c2d1e",
+          "title": "Tourists",
+          "chapter": 4,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "2d6b9f5d-7350-4d2b-892b-590269004024",
+          "title": "Homes",
+          "chapter": 5,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "3f5374fc-a32f-41b5-b2a8-ca39688a8f42",
+          "title": "Work",
+          "chapter": 6,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "0a25ce2e-ab5c-4b56-b79f-fbe1e6de2ee7",
+          "title": "Transportation",
+          "chapter": 7,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "6b9fa7dd-1284-4784-b21a-c58069cb15ac",
+          "title": "Fun",
+          "chapter": 8,
+          "new": 0,
+          "due": 0
+        }
+      ]
+    },
+    {
+      "id": "2b3c4d5e-6f7a-8b9c-0d1e-2f3a4b5c6d7e",
+      "title": "Cities",
+      "level": 2,
+      "subDecks": [
+        {
+          "id": "eddfb429-d46b-4afb-bc58-afb18a632363",
+          "title": "Introduction",
+          "chapter": 0,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "a3bd90f3-6fb4-438f-a0a7-208289ebb5ae",
+          "title": "What is a city?",
+          "chapter": 1,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "259533fc-bae5-4009-9db0-0606514081ca",
+          "title": "Buildings",
+          "chapter": 2,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "9bbec16e-52e8-4ada-b6e0-c22285a1170f",
+          "title": "Water",
+          "chapter": 3,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "7d3164bc-b1d6-4f3a-a6eb-9490589c2d1e",
+          "title": "Tourists",
+          "chapter": 4,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "2d6b9f5d-7350-4d2b-892b-590269004024",
+          "title": "Homes",
+          "chapter": 5,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "3f5374fc-a32f-41b5-b2a8-ca39688a8f42",
+          "title": "Work",
+          "chapter": 6,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "0a25ce2e-ab5c-4b56-b79f-fbe1e6de2ee7",
+          "title": "Transportation",
+          "chapter": 7,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "6b9fa7dd-1284-4784-b21a-c58069cb15ac",
+          "title": "Fun",
+          "chapter": 8,
+          "new": 0,
+          "due": 0
+        }
+      ]
+    },
+    {
+      "id": "3c4d5e6f-7a8b-9c0d-1e2f-3a4b5c6d7e8f",
+      "title": "How We Make Products",
+      "level": 3,
+      "subDecks": [
+        {
+          "id": "eddfb429-d46b-4afb-bc58-afb18a632363",
+          "title": "Introduction",
+          "chapter": 0,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "a3bd90f3-6fb4-438f-a0a7-208289ebb5ae",
+          "title": "What is a city?",
+          "chapter": 1,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "259533fc-bae5-4009-9db0-0606514081ca",
+          "title": "Buildings",
+          "chapter": 2,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "9bbec16e-52e8-4ada-b6e0-c22285a1170f",
+          "title": "Water",
+          "chapter": 3,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "7d3164bc-b1d6-4f3a-a6eb-9490589c2d1e",
+          "title": "Tourists",
+          "chapter": 4,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "2d6b9f5d-7350-4d2b-892b-590269004024",
+          "title": "Homes",
+          "chapter": 5,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "3f5374fc-a32f-41b5-b2a8-ca39688a8f42",
+          "title": "Work",
+          "chapter": 6,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "0a25ce2e-ab5c-4b56-b79f-fbe1e6de2ee7",
+          "title": "Transportation",
+          "chapter": 7,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "6b9fa7dd-1284-4784-b21a-c58069cb15ac",
+          "title": "Fun",
+          "chapter": 8,
+          "new": 0,
+          "due": 0
+        }
+      ]
+    },
+    {
+      "id": "4d5e6f7a-8b9c-0d1e-2f3a-4b5c6d7e8f9a",
+      "title": "Incredible Earth",
+      "level": 4,
+      "subDecks": [
+        {
+          "id": "eddfb429-d46b-4afb-bc58-afb18a632363",
+          "title": "Introduction",
+          "chapter": 0,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "a3bd90f3-6fb4-438f-a0a7-208289ebb5ae",
+          "title": "What is a city?",
+          "chapter": 1,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "259533fc-bae5-4009-9db0-0606514081ca",
+          "title": "Buildings",
+          "chapter": 2,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "9bbec16e-52e8-4ada-b6e0-c22285a1170f",
+          "title": "Water",
+          "chapter": 3,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "7d3164bc-b1d6-4f3a-a6eb-9490589c2d1e",
+          "title": "Tourists",
+          "chapter": 4,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "2d6b9f5d-7350-4d2b-892b-590269004024",
+          "title": "Homes",
+          "chapter": 5,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "3f5374fc-a32f-41b5-b2a8-ca39688a8f42",
+          "title": "Work",
+          "chapter": 6,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "0a25ce2e-ab5c-4b56-b79f-fbe1e6de2ee7",
+          "title": "Transportation",
+          "chapter": 7,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "6b9fa7dd-1284-4784-b21a-c58069cb15ac",
+          "title": "Fun",
+          "chapter": 8,
+          "new": 0,
+          "due": 0
+        }
+      ]
+    },
+    {
+      "id": "6ba7b810-9dad-11d1-80b4-00c04fd430c8",
+      "title": "Materials to Products",
+      "subDecks": [
+        {
+          "id": "eddfb429-d46b-4afb-bc58-afb18a632363",
+          "title": "Introduction",
+          "chapter": 0,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "a3bd90f3-6fb4-438f-a0a7-208289ebb5ae",
+          "title": "What is a city?",
+          "chapter": 1,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "259533fc-bae5-4009-9db0-0606514081ca",
+          "title": "Buildings",
+          "chapter": 2,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "9bbec16e-52e8-4ada-b6e0-c22285a1170f",
+          "title": "Water",
+          "chapter": 3,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "7d3164bc-b1d6-4f3a-a6eb-9490589c2d1e",
+          "title": "Tourists",
+          "chapter": 4,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "2d6b9f5d-7350-4d2b-892b-590269004024",
+          "title": "Homes",
+          "chapter": 5,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "3f5374fc-a32f-41b5-b2a8-ca39688a8f42",
+          "title": "Work",
+          "chapter": 6,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "0a25ce2e-ab5c-4b56-b79f-fbe1e6de2ee7",
+          "title": "Transportation",
+          "chapter": 7,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "6b9fa7dd-1284-4784-b21a-c58069cb15ac",
+          "title": "Fun",
+          "chapter": 8,
+          "new": 0,
+          "due": 0
+        }
+      ]
+    },
+    {
+      "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+      "title": "Incredible Energy",
+      "subDecks": [
+        {
+          "id": "eddfb429-d46b-4afb-bc58-afb18a632363",
+          "title": "Introduction",
+          "chapter": 0,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "a3bd90f3-6fb4-438f-a0a7-208289ebb5ae",
+          "title": "What is a city?",
+          "chapter": 1,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "259533fc-bae5-4009-9db0-0606514081ca",
+          "title": "Buildings",
+          "chapter": 2,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "9bbec16e-52e8-4ada-b6e0-c22285a1170f",
+          "title": "Water",
+          "chapter": 3,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "7d3164bc-b1d6-4f3a-a6eb-9490589c2d1e",
+          "title": "Tourists",
+          "chapter": 4,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "2d6b9f5d-7350-4d2b-892b-590269004024",
+          "title": "Homes",
+          "chapter": 5,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "3f5374fc-a32f-41b5-b2a8-ca39688a8f42",
+          "title": "Work",
+          "chapter": 6,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "0a25ce2e-ab5c-4b56-b79f-fbe1e6de2ee7",
+          "title": "Transportation",
+          "chapter": 7,
+          "new": 0,
+          "due": 0
+        },
+        {
+          "id": "6b9fa7dd-1284-4784-b21a-c58069cb15ac",
+          "title": "Fun",
+          "chapter": 8,
+          "new": 0,
+          "due": 0
+        }
+      ]
+    }
+  ],
+  "decks": [
+    {
+      "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "cards": [
+        {
+          "id": "1",
+          "front": {
+            "text": "Front Text",
+            "audio": "audio"
+          },
+          "back": {
+            "words": [
+              {
+                "spelling": "Spelling",
+                "phonetic": "Phonetic",
+                "definition": "Definition",
+                "audio": "Audio",
+                "image": "Image"
+              },
+              {
+                "spelling": "Spelling",
+                "phonetic": "Phonetic",
+                "definition": "Definition",
+                "audio": "Audio",
+                "image": "Image"
+              }
+            ]
+          },
+          "studyDate": "2024-01-05T00:00:00.000Z",
+          "dueDate": "2024-01-10T00:00:00.000Z"
+        },
+        {
+          "id": "2",
+          "front": {
+            "text": "Front Text 2",
+            "audio": "audio 2"
+          },
+          "back": {
+            "words": [
+              {
+                "spelling": "Spelling",
+                "phonetic": "Phonetic",
+                "definition": "Definition",
+                "audio": "Audio",
+                "image": "Image"
+              }
+            ]
+          },
+          "studyDate": "2024-01-05T00:00:00.000Z",
+          "dueDate": "2024-01-10T00:00:00.000Z"
+        }
+      ]
+    }
+  ],
+  "subdecks": [
+    {
+      "id": "eddfb429-d46b-4afb-bc58-afb18a632363",
+      "cards": [
+        {
+          "id": "1",
+          "front": {
+            "text": "They demanded adequate remuneration for their work.",
+            "audio": "audio"
+          },
+          "back": {
+            "words": [
+              {
+                "spelling": "Spelling",
+                "phonetic": "Phonetic",
+                "definition": "Definition",
+                "audio": "Audio",
+                "image": "Image"
+              },
+              {
+                "spelling": "Spelling",
+                "phonetic": "Phonetic",
+                "definition": "Definition",
+                "audio": "Audio",
+                "image": "Image"
+              }
+            ]
+          },
+          "studyDate": "2024-01-05T00:00:00.000Z",
+          "dueDate": "2024-01-10T00:00:00.000Z"
+        },
+        {
+          "id": "2",
+          "front": {
+            "text": "He bribed immigration officials and entered the country illegally.",
+            "audio": "audio 2"
+          },
+          "back": {
+            "words": [
+              {
+                "spelling": "Spelling",
+                "phonetic": "Phonetic",
+                "definition": "Definition",
+                "audio": "Audio",
+                "image": "Image"
+              }
+            ]
+          },
+          "studyDate": "2024-01-05T00:00:00.000Z",
+          "dueDate": "2024-01-10T00:00:00.000Z"
+        },
+        {
+          "id": "3",
+          "front": {
+            "text": "Repairing watches must be a very finicky job.",
+            "audio": "audio 2"
+          },
+          "back": {
+            "words": [
+              {
+                "spelling": "Spelling",
+                "phonetic": "Phonetic",
+                "definition": "Definition",
+                "audio": "Audio",
+                "image": "Image"
+              }
+            ]
+          },
+          "studyDate": "2024-01-05T00:00:00.000Z",
+          "dueDate": "2024-01-10T00:00:00.000Z"
+        }
+      ]
+    }
+  ]
+}
