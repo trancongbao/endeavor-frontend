@@ -3,12 +3,6 @@ import "./DeckTile.scss";
 import { NavLink } from "react-router-dom";
 
 export default function DeckTile({ isTeacher, deck }) {
-  //const [isTeacherUrl, setIsTeacherUrl] = useState(false);
-  // useEffect(() => {
-  //   if (window.location.href.includes("teacher")) {
-  //     setIsTeacherUrl(true);
-  //   }
-  // }, []);
   return (
     <div className="deck-card">
       <h2 className="title">{deck.title}</h2>
