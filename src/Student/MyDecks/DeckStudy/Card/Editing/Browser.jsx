@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import "./Editing.scss";
-import { useParams } from "react-router-dom";
-const Editing = () => {
-  const { deckId } = useParams();
+import {useEffect, useState} from "react";
+import "./Browser.scss";
+import {useParams} from "react-router-dom";
+
+export default function Browser() {
+  const {deckId} = useParams();
   const [deckList, setDeckList] = useState([]);
   const [cardList, setCardList] = useState([]);
   const [selectedSubDeck, setSelectedSubDeck] = useState(null);
@@ -104,4 +105,3 @@ const Editing = () => {
     </div>
   );
 };
-export default Editing;

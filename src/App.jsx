@@ -6,7 +6,7 @@ import SideBar from "./Common/SideBar/SideBar";
 import "./App.scss";
 import React from "react";
 import Teacher from "./Teacher/Teacher";
-import Editing from "./Student/MyDecks/DeckStudy/Card/Editing/Editing";
+import DeckBrowser from "./Student/MyDecks/DeckStudy/Card/Editing/Browser";
 
 export default function App() {
   return (
@@ -23,8 +23,7 @@ export default function App() {
           <Route path="/teacher" element={<Teacher />} >
             <Route path="my-decks" element={<MyDecks />} />
             <Route index element={<Navigate to="my-decks" />} />
-            <Route end path={`my-decks/:deckId`} element={<DeckStudy />} />
-            <Route end path={`my-decks/edit/:deckId`} element={<Editing />} />
+            <Route end path={`my-decks/:deckId`} element={<DeckBrowser />} />
           </Route>
         </Routes>
       </BrowserRouter>

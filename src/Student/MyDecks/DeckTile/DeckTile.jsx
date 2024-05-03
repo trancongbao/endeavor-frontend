@@ -34,8 +34,8 @@ export default function DeckTile({ deck }) {
       </table>
       <div className="action-btns">
         {isTeacherUrl ? (
-          <NavLink className="inline-btn edit-btn" to={`edit/${deck.id}`}>
-            Edit
+          <NavLink className="inline-btn edit-btn" to={`${deck.id}`}>
+            Browse
           </NavLink>
         ) : (
           <NavLink className="inline-btn" to={`${deck.id}`}>
