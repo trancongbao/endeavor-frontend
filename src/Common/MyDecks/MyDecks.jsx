@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./MyDecks.scss";
 import DeckTile from "./DeckTile/DeckTile";
 
-export default function MyDecks() {
+export default function MyDecks({isTeacher}) {
   const [myDecks, setMyDecks] = useState([]);
 
   useEffect(() => {
@@ -18,7 +18,7 @@ export default function MyDecks() {
   return (
     <div className="my-decks-grid-container">
       {myDecks.map((deck) => (
-        <DeckTile key={deck.id} deck={deck} />
+        <DeckTile key={deck.id} isTeacher={isTeacher} deck={deck} />
       ))}
     </div>
   );

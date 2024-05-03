@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./DeckTile.scss";
 import { NavLink } from "react-router-dom";
 
-export default function DeckTile({ deck }) {
-  const [isTeacherUrl, setIsTeacherUrl] = useState(false);
-  useEffect(() => {
-    if (window.location.href.includes("teacher")) {
-      setIsTeacherUrl(true);
-    }
-  }, []);
+export default function DeckTile({ isTeacher, deck }) {
   return (
     <div className="deck-card">
       <h2 className="title">{deck.title}</h2>
@@ -33,7 +27,7 @@ export default function DeckTile({ deck }) {
         </tbody>
       </table>
       <div className="action-btns">
-        {isTeacherUrl ? (
+        {isTeacher ? (
           <NavLink className="inline-btn edit-btn" to={`${deck.id}`}>
             Browse
           </NavLink>
