@@ -8,7 +8,6 @@ export default function MyDecks({isTeacher}) {
   useEffect(() => {
     const fetchData = async () => {
       await login(); // Wait for login to complete
-      console.log(`cookie = ${document.cookie}`)
       try {
         const data = await getMyDecks(); // Call getMyDecks after login
         setMyDecks(data);
