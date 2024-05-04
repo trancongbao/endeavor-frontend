@@ -29,10 +29,6 @@ export default function MyDecks({isTeacher}) {
 }
 
 function getMyDecks() {
-  const url = 'http://localhost:4000/teach';
-
-  console.log(`cookie = ${document.cookie}`)
-
   return fetch(
     'http://localhost:3000/teach',
     {
