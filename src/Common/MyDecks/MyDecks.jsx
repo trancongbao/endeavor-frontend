@@ -10,7 +10,7 @@ export default function MyDecks({isTeacher}) {
       await login(); // Wait for login to complete
       try {
         const data = await getMyDecks(); // Call getMyDecks after login
-        setMyDecks(data);
+        setMyDecks(data.result);
       } catch (error) {
         console.error('Error fetching decks:', error.message);
       }
@@ -42,7 +42,7 @@ function getMyDecks() {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "method": "listAllCourses",
+        "method": "getMyDecks",
         "params": {}
       })
     }
