@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./MyDecks.scss";
 import DeckTile from "./DeckTile/DeckTile";
+import TeacherDeckTile from "../../Teacher/MyDecks/DeckTile/DeckTile";
 
 export default function MyDecks({isTeacher}) {
   const [myDecks, setMyDecks] = useState([]);
