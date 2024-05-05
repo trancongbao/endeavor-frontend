@@ -27,11 +27,12 @@ export default function Login(props) {
     })
     .then((response) => response.json())
     .then((response) => {
-      if ('success' === response.message) {
+      if (response.result) {
+        console.log(response.result)
         // localStorage.setItem('user', JSON.stringify({username, token: response.token}))
         // props.setLoggedIn(true)
         // props.setUsername(username)
-        navigate('teacher')
+        navigate('/teacher')
       } else {
         window.alert('Wrong email or password')
       }
