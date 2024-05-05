@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import "./MyDecks.scss";
-import DeckTile from "./DeckTile/DeckTile";
+import TeacherDeckTile from "../../Teacher/MyDecks/DeckTile/DeckTile";
+import StudentDeckTile from "../../Student/MyDecks/DeckTile/DeckTile";
 
 export default function MyDecks({isTeacher}) {
   const [myDecks, setMyDecks] = useState([]);
@@ -20,9 +21,11 @@ export default function MyDecks({isTeacher}) {
 
   return (
     <div className="my-decks-grid-container">
-      {myDecks.map((deck) => (
-        <DeckTile key={deck.id} isTeacher={isTeacher} deck={deck}/>
-      ))}
+      {myDecks.map((deck) => {
+        return isTeacher
+          ? (<TeacherDeckTile key={deck.id} deck={deck}/>)
+          : (<StudentDeckTile key={deck.id} deck={deck}/>)
+      })}
     </div>
   );
 }

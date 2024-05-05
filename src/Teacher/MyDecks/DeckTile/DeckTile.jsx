@@ -10,24 +10,20 @@ export default function DeckTile({deck}) {
         <thead className="table-head">
         <tr>
           <th scope="col"></th>
-          <th scope="col">New</th>
-          <th scope="col">Due</th>
         </tr>
         </thead>
         <tbody className="table-body">
         {deck.subDecks.map((subDeck) => (
           <tr className="body-row" key={subDeck.id}>
-            <td className="row-title">
-              {subDeck.title}
-            </td>
-            <td className="row-new">{subDeck.new}</td>
-            <td className="row-due">{subDeck.due}</td>
+            <td className="row-title">{subDeck.title}</td>
           </tr>
         ))}
         </tbody>
       </table>
       <div className="action-btns">
-        <NavLink className="inline-btn" to={`${deck.id}`}> Study </NavLink>
+        <NavLink className="inline-btn edit-btn" to={`${deck.id}`}>
+          Browse
+        </NavLink>
       </div>
     </div>
   );
