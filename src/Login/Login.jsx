@@ -20,8 +20,8 @@ export default function Login(props) {
         method: "login",
         params: {
           userType: "teacher",
-          username: "teacher1",
-          password: "password1"
+          username: username,
+          password: password
         }
       }),
     })
