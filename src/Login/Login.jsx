@@ -30,7 +30,7 @@ export default function Login(props) {
       if (response.result) {
         console.log(response.result)
         // localStorage.setItem('user', JSON.stringify({username, token: response.token}))
-        // props.setLoggedIn(true)
+        props.setLoggedIn(true)
         // props.setUsername(username)
         navigate('/teacher')
       } else {

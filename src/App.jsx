@@ -23,7 +23,7 @@ export default function App() {
           <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />} />
 
           {/* Routes for teacher */}
-          <Route path="/teacher" element={<Teacher />} >
+          <Route path="/teacher" element={loggedIn ? <Teacher /> : <Navigate to="/login" />} >
             <Route path="my-decks" element={<MyDecks isTeacher={true} />} />
             <Route index element={<Navigate to="my-decks" />} />
             <Route end path={`my-decks/:deckId`} element={<DeckBrowser />} />
