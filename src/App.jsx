@@ -12,6 +12,7 @@ import Login from "./Login/Login";
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [username, setUsername] = useState('')
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const currentUser = async () => {
@@ -30,23 +31,35 @@ export default function App() {
             }),
           }
         )
+        console.log(response)
         if (response.ok) {
           const body = await response.json();
+          console.log(body)
           const result = body.result
+          console.log(result)
           if (result) {
+            console.log("setIsLoggedIn to true")
             setIsLoggedIn(true);
             setUsername(result.username)
+            console.log("isLoggedIn: ", isLoggedIn)
           }
         } else {
           console.error('Calling /currentUser failed: ', response.statusText);
         }
       } catch (error) {
         console.error('Error checking cookie:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
     currentUser();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; // Render a loading screen until authentication is checked
+  }
+
 
   return (
     <React.Fragment>
