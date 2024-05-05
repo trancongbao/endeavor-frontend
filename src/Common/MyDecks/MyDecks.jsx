@@ -21,9 +21,11 @@ export default function MyDecks({isTeacher}) {
 
   return (
     <div className="my-decks-grid-container">
-      {myDecks.map((deck) => (
-        <DeckTile key={deck.id} isTeacher={isTeacher} deck={deck}/>
-      ))}
+      {myDecks.map((deck) => {
+        return isTeacher
+          ? (<TeacherDeckTile key={deck.id} deck={deck}/>)
+          : (<DeckTile key={deck.id} isTeacher={false} deck={deck}/>)
+      })}
     </div>
   );
 }
