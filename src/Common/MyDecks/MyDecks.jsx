@@ -7,7 +7,6 @@ export default function MyDecks({isTeacher}) {
 
   useEffect(() => {
     const fetchData = async () => {
-      await login(); // Wait for login to complete
       try {
         const data = await getMyDecks(); // Call getMyDecks after login
         setMyDecks(data.result);
@@ -54,25 +53,4 @@ function getMyDecks() {
     console.error('Error fetching decks:', error.message);
     return [];
   });
-}
-
-function login() {
-  return fetch(
-    'http://localhost:3000/auth',
-    {
-      method: "POST",
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        "method": "login",
-        "params": {
-          "userType": "teacher",
-          "username": "teacher1",
-          "password": "password1"
-        }
-      })
-    }
-  )
 }
