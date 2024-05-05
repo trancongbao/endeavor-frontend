@@ -11,7 +11,7 @@ import Login from "./Login/Login";
 
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
 
   return (
     <React.Fragment>
@@ -20,7 +20,7 @@ export default function App() {
         <Routes>
           {/* Routes for home/login page */}
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
+          <Route path="/login" element={<Login setLoggedIn={setLoggedIn} setUsername={setUsername} />} />
 
           {/* Routes for teacher */}
           <Route path="/teacher" element={<Teacher />} >

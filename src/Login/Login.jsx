@@ -1,34 +1,55 @@
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 
-const Login = (props) => {
-  const [email, setEmail] = useState('')
+export default function Login(props) {
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [emailError, setEmailError] = useState('')
   const [passwordError, setPasswordError] = useState('')
 
   const navigate = useNavigate()
 
-  const onButtonClick = () => {
-    // You'll update this function later...
+  const login = () => {
+    fetch('http://localhost:3000/auth', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        method: "login",
+        params: {
+          userType: "teacher",
+          username: "teacher1",
+          password: "password1"
+        }
+      }),
+    })
+    .then((response) => response.json())
+    .then((response) => {
+      if ('success' === response.message) {
+        // localStorage.setItem('user', JSON.stringify({username, token: response.token}))
+        // props.setLoggedIn(true)
+        // props.setUsername(username)
+        navigate('teacher')
+      } else {
+        window.alert('Wrong email or password')
+      }
+    })
   }
 
   return (
     <div className={'mainContainer'}>
-      <div className={'titleContainer'}>
-        <div>Login</div>
-      </div>
-      <br />
       <div className={'inputContainer'}>
         <input
-          value={email}
+          value={username}
           placeholder="Enter your username here"
-          onChange={(ev) => setEmail(ev.target.value)}
+          onChange={(event) => setUsername(event.target.value)}
           className={'inputBox'}
         />
         <label className="errorLabel">{emailError}</label>
       </div>
-      <br />
+      <br/>
       <div className={'inputContainer'}>
         <input
           value={password}
@@ -38,12 +59,10 @@ const Login = (props) => {
         />
         <label className="errorLabel">{passwordError}</label>
       </div>
-      <br />
+      <br/>
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={onButtonClick} value={'Log in'} />
+        <input className={'inputButton'} type="button" onClick={login} value={'Log in'}/>
       </div>
     </div>
   )
 }
-
-export default Login
