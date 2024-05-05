@@ -14,17 +14,18 @@ export default function App() {
       <BrowserRouter>
         <SideBar />
         <Routes>
-          <Route path="/student" element={<Student />}>
-            <Route path="my-decks" element={<MyDecks isTeacher={false} />} />
-            <Route index element={<Navigate to="my-decks" />} />
-            <Route end path={`my-decks/:deckId`} element={<DeckStudy />} />
-          </Route>
-          <Route path="/" element={<Navigate to="/student" />} />
+          <Route path="/" element={<Navigate to="/teacher" />} />
           <Route path="/teacher" element={<Teacher />} >
             <Route path="my-decks" element={<MyDecks isTeacher={true} />} />
             <Route index element={<Navigate to="my-decks" />} />
             <Route end path={`my-decks/:deckId`} element={<DeckBrowser />} />
           </Route>
+          <Route path="/student" element={<Student />}>
+            <Route path="my-decks" element={<MyDecks isTeacher={false} />} />
+            <Route index element={<Navigate to="my-decks" />} />
+            <Route end path={`my-decks/:deckId`} element={<DeckStudy />} />
+          </Route>
+
         </Routes>
       </BrowserRouter>
     </React.Fragment>
