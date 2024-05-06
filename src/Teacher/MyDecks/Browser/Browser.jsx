@@ -1,58 +1,45 @@
 import {useEffect, useState} from "react";
 import "./Browser.scss";
+import {rpc} from "../../../rpc/rpc"
 import {useParams} from "react-router-dom";
 
 export default function Browser() {
-  const {deckId} = useParams();
+  const {deckId} = useParams()
   const [deckList, setDeckList] = useState([]);
   const [cardList, setCardList] = useState([]);
   const [selectedSubDeck, setSelectedSubDeck] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-    getDeck()
-      .then((data) => {
-        setDeckList(data.subDecks);
-      })
-      .catch((error) => {
-        console.error("Error fetching decks:", error.message);
-      });
-  }, []);
+    async function fetchData() {
+      return await rpc("teach", "getSubdecks", {id: deckId})
+    }
 
-  const getDeck = () => {
-    const url = "http://localhost:4000/myDecks/" + deckId;
-    return fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          // throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error fetching decks:", error.message);
-        throw error;
-      });
-  };
+    fetchData().then((res) => {
+      console.log(res)
+      setDeckList(res)
+    })
+  }, []);
 
   const getCardList = (event, id) => {
     event.preventDefault();
     setSelectedSubDeck(id);
     const url = "http://localhost:4000/subdecks/" + id;
     return fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          // throw new Error("Network response was not ok");
-          setCardList([]);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCardList(data.cards);
-      })
-      .catch((error) => {
-        console.error("Error fetching decks:", error.message);
-        throw error;
-      });
+    .then((response) => {
+      if (!response.ok) {
+        // throw new Error("Network response was not ok");
+        setCardList([]);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setCardList(data.cards);
+    })
+    .catch((error) => {
+      console.error("Error fetching decks:", error.message);
+      throw error;
+    });
   };
 
   const getCardDetail = (event, id) => {
