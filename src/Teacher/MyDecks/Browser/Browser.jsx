@@ -1,8 +1,10 @@
 import {useEffect, useState} from "react";
 import "./Browser.scss";
 import {rpc} from "../../../rpc/rpc"
+import {useParams} from "react-router-dom";
 
-export default function Browser({deckId}) {
+export default function Browser() {
+  const {deckId} = useParams()
   const [deckList, setDeckList] = useState([]);
   const [cardList, setCardList] = useState([]);
   const [selectedSubDeck, setSelectedSubDeck] = useState(null);
@@ -10,16 +12,14 @@ export default function Browser({deckId}) {
 
   useEffect(() => {
     async function fetchData() {
-      const subDecks = await rpc("teach", "getDeck", {id: deckId})
-      setDeckList(subDecks);
+      return await rpc("teach", "getSubdecks", {id: deckId})
     }
 
-    fetchData()
+    fetchData().then((res) => {
+      console.log(res)
+      setDeckList(res)
+    })
   }, []);
-
-  // async function getDeck(id) {
-  //   const result = await rpc("teach", "getDeck", {id: id})
-  // }
 
   const getCardList = (event, id) => {
     event.preventDefault();
