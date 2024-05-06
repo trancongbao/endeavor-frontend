@@ -1,58 +1,45 @@
 import {useEffect, useState} from "react";
 import "./Browser.scss";
-import {useParams} from "react-router-dom";
+import {rpc} from "../../../rpc/rpc"
 
-export default function Browser() {
-  const {deckId} = useParams();
+export default function Browser({deckId}) {
   const [deckList, setDeckList] = useState([]);
   const [cardList, setCardList] = useState([]);
   const [selectedSubDeck, setSelectedSubDeck] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-    getDeck()
-      .then((data) => {
-        setDeckList(data.subDecks);
-      })
-      .catch((error) => {
-        console.error("Error fetching decks:", error.message);
-      });
+    async function fetchData() {
+      const subDecks = await rpc("teach", "getDeck", {id: deckId})
+      setDeckList(subDecks);
+    }
+
+    fetchData()
   }, []);
 
-  const getDeck = () => {
-    const url = "http://localhost:4000/myDecks/" + deckId;
-    return fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          // throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("Error fetching decks:", error.message);
-        throw error;
-      });
-  };
+  // async function getDeck(id) {
+  //   const result = await rpc("teach", "getDeck", {id: id})
+  // }
 
   const getCardList = (event, id) => {
     event.preventDefault();
     setSelectedSubDeck(id);
     const url = "http://localhost:4000/subdecks/" + id;
     return fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          // throw new Error("Network response was not ok");
-          setCardList([]);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCardList(data.cards);
-      })
-      .catch((error) => {
-        console.error("Error fetching decks:", error.message);
-        throw error;
-      });
+    .then((response) => {
+      if (!response.ok) {
+        // throw new Error("Network response was not ok");
+        setCardList([]);
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setCardList(data.cards);
+    })
+    .catch((error) => {
+      console.error("Error fetching decks:", error.message);
+      throw error;
+    });
   };
 
   const getCardDetail = (event, id) => {

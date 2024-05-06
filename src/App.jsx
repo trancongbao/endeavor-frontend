@@ -6,7 +6,7 @@ import SideBar from "./Common/SideBar/SideBar";
 import "./App.scss";
 import React, {useEffect, useState} from "react";
 import Teacher from "./Teacher/Teacher";
-import DeckBrowser from "./Student/MyDecks/DeckStudy/Card/Editing/Browser";
+import DeckBrowser from "./Teacher/MyDecks/Browser/Browser";
 import Login from "./Login/Login";
 
 export default function App() {
@@ -72,8 +72,8 @@ export default function App() {
 
           {/* Routes for teacher */}
           <Route path="/teacher" element={isLoggedIn ? <Teacher/> : <Navigate to="/login"/>}>
-            <Route path="my-decks" element={<MyDecks isTeacher={true}/>}/>
             <Route index element={<Navigate to="my-decks"/>}/>
+            <Route path="my-decks" element={<MyDecks isTeacher={true}/>}/>
             <Route end path={`my-decks/:deckId`} element={<DeckBrowser/>}/>
           </Route>
 
