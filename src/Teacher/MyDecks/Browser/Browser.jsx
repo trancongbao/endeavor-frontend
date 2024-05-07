@@ -7,8 +7,8 @@ export default function Browser() {
   const {deckId} = useParams()
 
   const [subdecks, setSubdecks] = useState([]);
-  const [cardList, setCardList] = useState([]);
   const [selectedSubdeck, setSelectedSubdeck] = useState(null);
+  const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export default function Browser() {
   function getCards(subdeckId) {
     rpc("teach", "getCards", {id: subdeckId})
     .then((cards) => {
-      setCardList(cards)
+      setCards(cards)
     })
   }
 
@@ -59,7 +59,7 @@ export default function Browser() {
       </section>
       <section className="card-list">
         <ul>
-          {cardList.map((card) => (
+          {cards.map((card) => (
             <li
               className={selectedCard === card.id ? "selected" : ""}
               key={card.id}
