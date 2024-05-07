@@ -32,24 +32,8 @@ export default function Browser() {
 
   const getCardList = (event, id) => {
     event.preventDefault();
-    setSelectedSubDeck(id);
-    const url = "http://localhost:4000/subdecks/" + id;
-    return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        // throw new Error("Network response was not ok");
-        setCardList([]);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      setCardList(data.cards);
-    })
-    .catch((error) => {
-      console.error("Error fetching decks:", error.message);
-      throw error;
-    });
-  };
+    getCards(id)
+  }
 
   const getCardDetail = (event, id) => {
     event.preventDefault();
