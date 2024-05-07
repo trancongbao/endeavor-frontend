@@ -22,9 +22,7 @@ export default function Browser() {
         getCards(firstSubdeckId)
         .then((cards) => {
           setCards(cards)
-          //Select the first card
-          const firstCardId = cards.find((card) => card.order === 0).id
-          setSelectedCard(firstCardId)
+          selectFirstCard(cards)
         })
       }
     })
@@ -81,10 +79,13 @@ export default function Browser() {
     getCards(id)
     .then((cards) => {
       setCards(cards)
-      //Select the first card
-      const firstCardId = cards.find((card) => card.order === 0).id
-      setSelectedCard(firstCardId)
+      selectFirstCard(cards)
     })
+  }
+
+  function selectFirstCard(cards) {
+    const firstCardId = cards.find((card) => card.order === 0).id
+    setSelectedCard(firstCardId)
   }
 
   function selectCard(event, id) {
