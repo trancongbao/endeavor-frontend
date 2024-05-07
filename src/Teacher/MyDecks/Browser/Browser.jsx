@@ -37,7 +37,7 @@ export default function Browser() {
     getCards(id)
   }
 
-  const getCardDetail = (event, id) => {
+  const selectCard = (event, id) => {
     event.preventDefault();
     setSelectedCard(id);
   };
@@ -63,7 +63,7 @@ export default function Browser() {
             <li
               className={selectedCard === card.id ? "selected" : ""}
               key={card.id}
-              onClick={(event) => getCardDetail(event, card.id)}
+              onClick={(event) => selectCard(event, card.id)}
             >
               {card.text}
             </li>
