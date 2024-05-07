@@ -11,13 +11,9 @@ export default function Browser() {
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-    async function fetchData() {
-      return await rpc("teach", "getSubdecks", {id: deckId})
-    }
-
-    fetchData().then((res) => {
-      console.log(res)
-      setDeckList(res)
+    rpc("teach", "getSubdecks", {id: deckId})
+    .then((subdecks) => {
+      setDeckList(subdecks)
     })
   }, []);
 
