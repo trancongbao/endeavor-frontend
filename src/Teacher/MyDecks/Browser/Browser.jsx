@@ -21,6 +21,7 @@ export default function Browser() {
         setSelectedSubdeck(firstSubdeckId)
         getCards(firstSubdeckId)
         .then((cards) => {
+          setCards(cards)
           //Select the first card
           const firstCardId = cards.find((card) => card.order === 0).id
           setSelectedCard(firstCardId)
@@ -73,7 +74,6 @@ export default function Browser() {
   function getCards(subdeckId) {
     return rpc("teach", "getCards", {id: subdeckId})
     .then((cards) => {
-      setCards(cards)
       return cards
     })
   }
@@ -81,7 +81,9 @@ export default function Browser() {
   function selectSubdeck(event, id) {
     event.preventDefault();
     setSelectedSubdeck(id)
-    getCards(id)
+    getCards(id).then((cards) => {
+      setCards(cards)
+    })
   }
 
   function selectCard(event, id) {
