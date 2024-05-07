@@ -60,10 +60,6 @@ export default function Browser() {
     </div>
   )
 
-  function getCards(subdeckId) {
-    return rpc("teach", "getCards", {id: subdeckId})
-  }
-
   function selectFirstSubdeck(subdecks) {
     const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
     if (firstSubdeckId) {
@@ -84,6 +80,10 @@ export default function Browser() {
       setCards(cards)
       selectFirstCard(cards)
     })
+  }
+
+  function getCards(subdeckId) {
+    return rpc("teach", "getCards", {id: subdeckId})
   }
 
   function selectFirstCard(cards) {
