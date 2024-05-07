@@ -7,38 +7,17 @@ export default function Browser() {
   const {deckId} = useParams()
 
   const [subdecks, setSubdecks] = useState([]);
-  const [cardList, setCardList] = useState([]);
-  const [selectedSubDeck, setSelectedSubDeck] = useState(null);
+  const [selectedSubdeck, setSelectedSubdeck] = useState(null);
+  const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     rpc("teach", "getSubdecks", {id: deckId})
     .then((subdecks) => {
       setSubdecks(subdecks)
-      //Get cards of the 1st subdeck
-      const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
-      if (firstSubdeckId) {
-        getCards(firstSubdeckId)
-      }
+      selectFirstSubdeck(subdecks)
     })
-  }, []);
-
-  function getCards(subdeckId) {
-    rpc("teach", "getCards", {id: subdeckId})
-    .then((cards) => {
-      setCardList(cards)
-    })
-  }
-
-  const getCardList = (event, id) => {
-    event.preventDefault();
-    getCards(id)
-  }
-
-  const getCardDetail = (event, id) => {
-    event.preventDefault();
-    setSelectedCard(id);
-  };
+  }, [])
 
   return (
     <div className="edit-container">
@@ -46,9 +25,9 @@ export default function Browser() {
         <ul>
           {subdecks.map((deck) => (
             <li
-              className={selectedSubDeck === deck.id ? "selected" : ""}
+              className={selectedSubdeck === deck.id ? "selected" : ""}
               key={deck.id}
-              onClick={(event) => getCardList(event, deck.id)}
+              onClick={(event) => selectSubdeck(event, deck.id)}
             >
               {deck.title}
             </li>
@@ -57,11 +36,11 @@ export default function Browser() {
       </section>
       <section className="card-list">
         <ul>
-          {cardList.map((card) => (
+          {cards.map((card) => (
             <li
               className={selectedCard === card.id ? "selected" : ""}
               key={card.id}
-              onClick={(event) => getCardDetail(event, card.id)}
+              onClick={(event) => selectCard(event, card.id)}
             >
               {card.text}
             </li>
@@ -79,5 +58,41 @@ export default function Browser() {
         ``
       )}
     </div>
-  );
-};
+  )
+
+  function selectFirstSubdeck(subdecks) {
+    const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
+    if (firstSubdeckId) {
+      setSelectedSubdeck(firstSubdeckId)
+      getCards(firstSubdeckId)
+      .then((cards) => {
+        setCards(cards)
+        selectFirstCard(cards)
+      })
+    }
+  }
+
+  function selectSubdeck(event, id) {
+    event.preventDefault();
+    setSelectedSubdeck(id)
+    getCards(id)
+    .then((cards) => {
+      setCards(cards)
+      selectFirstCard(cards)
+    })
+  }
+
+  function getCards(subdeckId) {
+    return rpc("teach", "getCards", {id: subdeckId})
+  }
+
+  function selectFirstCard(cards) {
+    const firstCardId = cards.find((card) => card.order === 0).id
+    setSelectedCard(firstCardId)
+  }
+
+  function selectCard(event, id) {
+    event.preventDefault();
+    setSelectedCard(id);
+  }
+}
