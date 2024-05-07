@@ -31,16 +31,16 @@ export default function Browser() {
     })
   }
 
-  const selectSubdeck = (event, id) => {
+  function selectSubdeck(event, id) {
     event.preventDefault();
     setSelectedSubdeck(id)
     getCards(id)
   }
 
-  const selectCard = (event, id) => {
+  function selectCard(event, id) {
     event.preventDefault();
     setSelectedCard(id);
-  };
+  }
 
   return (
     <div className="edit-container">
