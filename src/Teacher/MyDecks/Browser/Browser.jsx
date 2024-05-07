@@ -5,42 +5,35 @@ import {useParams} from "react-router-dom";
 
 export default function Browser() {
   const {deckId} = useParams()
-  const [deckList, setDeckList] = useState([]);
+
+  const [subdecks, setSubdecks] = useState([]);
   const [cardList, setCardList] = useState([]);
   const [selectedSubDeck, setSelectedSubDeck] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-    async function fetchData() {
-      return await rpc("teach", "getSubdecks", {id: deckId})
-    }
-
-    fetchData().then((res) => {
-      console.log(res)
-      setDeckList(res)
+    rpc("teach", "getSubdecks", {id: deckId})
+    .then((subdecks) => {
+      setSubdecks(subdecks)
+      //Get cards of the 1st subdeck
+      const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
+      if (firstSubdeckId) {
+        getCards(firstSubdeckId)
+      }
     })
   }, []);
 
+  function getCards(subdeckId) {
+    rpc("teach", "getCards", {id: subdeckId})
+    .then((cards) => {
+      setCardList(cards)
+    })
+  }
+
   const getCardList = (event, id) => {
     event.preventDefault();
-    setSelectedSubDeck(id);
-    const url = "http://localhost:4000/subdecks/" + id;
-    return fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        // throw new Error("Network response was not ok");
-        setCardList([]);
-      }
-      return response.json();
-    })
-    .then((data) => {
-      setCardList(data.cards);
-    })
-    .catch((error) => {
-      console.error("Error fetching decks:", error.message);
-      throw error;
-    });
-  };
+    getCards(id)
+  }
 
   const getCardDetail = (event, id) => {
     event.preventDefault();
@@ -51,7 +44,7 @@ export default function Browser() {
     <div className="edit-container">
       <section className="deck-list">
         <ul>
-          {deckList.map((deck) => (
+          {subdecks.map((deck) => (
             <li
               className={selectedSubDeck === deck.id ? "selected" : ""}
               key={deck.id}
@@ -70,7 +63,7 @@ export default function Browser() {
               key={card.id}
               onClick={(event) => getCardDetail(event, card.id)}
             >
-              {card.front.text}
+              {card.text}
             </li>
           ))}
         </ul>
@@ -78,12 +71,8 @@ export default function Browser() {
       {selectedCard ? (
         <section className="edit-place">
           <div className="front-section">
-            <h1>FRONT</h1>
+            <h1>Text</h1>
             <input type="text"></input>
-          </div>
-          <div className="back-section">
-            <h1>BACK</h1>
-            <textarea type="text"></textarea>
           </div>
         </section>
       ) : (
