@@ -15,8 +15,33 @@ export default function Browser() {
     rpc("teach", "getSubdecks", {id: deckId})
     .then((subdecks) => {
       setSubdecks(subdecks)
+      const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
+      if (firstSubdeckId) {
+        rpc("teach", "getCards", {id: firstSubdeckId})
+        .then((cards) => {
+          setCardList(cards)
+        })
+      }
     })
   }, []);
+
+  const getCards = (id) => {
+    const url = "http://localhost:4000/subdecks/" + id;
+    return fetch(url)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setCardList(data.cards);
+    })
+    .catch((error) => {
+      console.error("Error fetching decks:", error.message);
+      throw error;
+    });
+  };
 
   const getCardList = (event, id) => {
     event.preventDefault();
