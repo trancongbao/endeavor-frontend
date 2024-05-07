@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom";
 
 export default function Browser() {
   const {deckId} = useParams()
-  const [deckList, setDeckList] = useState([]);
+  const [subdecks, setSubdecks] = useState([]);
   const [cardList, setCardList] = useState([]);
   const [selectedSubDeck, setSelectedSubDeck] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -13,7 +13,7 @@ export default function Browser() {
   useEffect(() => {
     rpc("teach", "getSubdecks", {id: deckId})
     .then((subdecks) => {
-      setDeckList(subdecks)
+      setSubdecks(subdecks)
     })
   }, []);
 
@@ -47,7 +47,7 @@ export default function Browser() {
     <div className="edit-container">
       <section className="deck-list">
         <ul>
-          {deckList.map((deck) => (
+          {subdecks.map((deck) => (
             <li
               className={selectedSubDeck === deck.id ? "selected" : ""}
               key={deck.id}
