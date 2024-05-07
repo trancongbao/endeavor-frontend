@@ -5,6 +5,7 @@ import {useParams} from "react-router-dom";
 
 export default function Browser() {
   const {deckId} = useParams()
+
   const [subdecks, setSubdecks] = useState([]);
   const [cardList, setCardList] = useState([]);
   const [selectedSubDeck, setSelectedSubDeck] = useState(null);
