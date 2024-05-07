@@ -71,12 +71,8 @@ export default function Browser() {
       {selectedCard ? (
         <section className="edit-place">
           <div className="front-section">
-            <h1>FRONT</h1>
+            <h1>Text</h1>
             <input type="text"></input>
-          </div>
-          <div className="back-section">
-            <h1>BACK</h1>
-            <textarea type="text"></textarea>
           </div>
         </section>
       ) : (
