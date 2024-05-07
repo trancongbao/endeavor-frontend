@@ -22,25 +22,7 @@ export default function Browser() {
         getCards(firstSubdeckId)
       }
     })
-  }, []);
-
-  function getCards(subdeckId) {
-    rpc("teach", "getCards", {id: subdeckId})
-    .then((cards) => {
-      setCards(cards)
-    })
-  }
-
-  function selectSubdeck(event, id) {
-    event.preventDefault();
-    setSelectedSubdeck(id)
-    getCards(id)
-  }
-
-  function selectCard(event, id) {
-    event.preventDefault();
-    setSelectedCard(id);
-  }
+  }, [])
 
   return (
     <div className="edit-container">
@@ -81,5 +63,23 @@ export default function Browser() {
         ``
       )}
     </div>
-  );
-};
+  )
+
+  function getCards(subdeckId) {
+    rpc("teach", "getCards", {id: subdeckId})
+    .then((cards) => {
+      setCards(cards)
+    })
+  }
+
+  function selectSubdeck(event, id) {
+    event.preventDefault();
+    setSelectedSubdeck(id)
+    getCards(id)
+  }
+
+  function selectCard(event, id) {
+    event.preventDefault();
+    setSelectedCard(id);
+  }
+}
