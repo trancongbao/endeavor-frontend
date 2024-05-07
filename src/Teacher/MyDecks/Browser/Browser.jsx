@@ -73,16 +73,17 @@ export default function Browser() {
 
   function getCards(subdeckId) {
     return rpc("teach", "getCards", {id: subdeckId})
-    .then((cards) => {
-      return cards
-    })
   }
 
   function selectSubdeck(event, id) {
     event.preventDefault();
     setSelectedSubdeck(id)
-    getCards(id).then((cards) => {
+    getCards(id)
+    .then((cards) => {
       setCards(cards)
+      //Select the first card
+      const firstCardId = cards.find((card) => card.order === 0).id
+      setSelectedCard(firstCardId)
     })
   }
 
