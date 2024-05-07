@@ -8,7 +8,7 @@ export default function Browser() {
 
   const [subdecks, setSubdecks] = useState([]);
   const [cardList, setCardList] = useState([]);
-  const [selectedSubDeck, setSelectedSubDeck] = useState(null);
+  const [selectedSubdeck, setSelectedSubdeck] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
@@ -30,8 +30,9 @@ export default function Browser() {
     })
   }
 
-  const getCardList = (event, id) => {
+  const selectSubdeck = (event, id) => {
     event.preventDefault();
+    setSelectedSubdeck(id)
     getCards(id)
   }
 
@@ -46,9 +47,9 @@ export default function Browser() {
         <ul>
           {subdecks.map((deck) => (
             <li
-              className={selectedSubDeck === deck.id ? "selected" : ""}
+              className={selectedSubdeck === deck.id ? "selected" : ""}
               key={deck.id}
-              onClick={(event) => getCardList(event, deck.id)}
+              onClick={(event) => selectSubdeck(event, deck.id)}
             >
               {deck.title}
             </li>
