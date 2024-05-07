@@ -15,11 +15,16 @@ export default function Browser() {
     rpc("teach", "getSubdecks", {id: deckId})
     .then((subdecks) => {
       setSubdecks(subdecks)
-      //Get cards of the 1st subdeck
+      //Select the first subdeck
       const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
       if (firstSubdeckId) {
         setSelectedSubdeck(firstSubdeckId)
         getCards(firstSubdeckId)
+        .then((cards) => {
+          //Select the first card
+          const firstCardId = cards.find((card) => card.order === 0).id
+          setSelectedCard(firstCardId)
+        })
       }
     })
   }, [])
@@ -66,9 +71,10 @@ export default function Browser() {
   )
 
   function getCards(subdeckId) {
-    rpc("teach", "getCards", {id: subdeckId})
+    return rpc("teach", "getCards", {id: subdeckId})
     .then((cards) => {
       setCards(cards)
+      return cards
     })
   }
 
