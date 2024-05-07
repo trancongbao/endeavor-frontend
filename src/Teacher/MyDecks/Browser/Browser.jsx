@@ -18,6 +18,7 @@ export default function Browser() {
       //Get cards of the 1st subdeck
       const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
       if (firstSubdeckId) {
+        setSelectedSubdeck(firstSubdeckId)
         getCards(firstSubdeckId)
       }
     })
