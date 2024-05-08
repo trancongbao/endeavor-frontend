@@ -4,22 +4,22 @@ import EditPane from './EditPane/EditPane';
 import "./CardArea.scss";
 
 export default function CardArea({cards}) {
-  const [selectedCard, setSelectedCard] = useState(null);
+  const [selectedCardId, setSelectedCardId] = useState(null);
 
   useEffect(() => {
     //Select the first card
     const firstCard = cards.find((card) => card.order === 0)
-    firstCard && setSelectedCard(firstCard.id)
+    firstCard && setSelectedCardId(firstCard.id)
   }, [cards]);
 
   return (
     <div className="card-area">
       <CardList
         cards={cards}
-        selectedCard={selectedCard}
-        setSelectedCard={setSelectedCard}
+        selectedCardId={selectedCardId}
+        setSelectedCardId={setSelectedCardId}
       />
-      <EditPane/>
+      <EditPane card={cards[selectedCardId]}/>
     </div>
   );
 }

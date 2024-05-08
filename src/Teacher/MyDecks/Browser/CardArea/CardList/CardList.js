@@ -1,12 +1,12 @@
-export default function CardList({cards, selectedCard, setSelectedCard}) {
+export default function CardList({cards, selectedCardId, setSelectedCardId}) {
   return (
     <section className="card-list">
       <ul>
         {cards.map((card) => (
           <li
-            className={selectedCard === card.id ? "selected" : ""}
+            className={selectedCardId === card.id ? "selected" : ""}
             key={card.id}
-            onClick={() => setSelectedCard(card.id)}
+            onClick={() => setSelectedCardId(card.id)}
           >
             {card.text}
           </li>
