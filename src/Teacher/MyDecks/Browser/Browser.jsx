@@ -47,16 +47,12 @@ export default function Browser() {
           ))}
         </ul>
       </section>
-      {selectedCard ? (
-        <section className="edit-place">
-          <div className="front-section">
-            <h1>Text</h1>
-            <input type="text"></input>
-          </div>
-        </section>
-      ) : (
-        ``
-      )}
+      <section className="edit-place">
+        <div className="front-section">
+          <h1>Text</h1>
+          <input type="text"></input>
+        </div>
+      </section>
     </div>
   )
 
