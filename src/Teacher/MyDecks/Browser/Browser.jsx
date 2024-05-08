@@ -2,6 +2,9 @@ import {useEffect, useState} from "react";
 import "./Browser.scss";
 import {rpc} from "../../../rpc/rpc"
 import {useParams} from "react-router-dom";
+import SubdeckList from './SubdeckList/SubdeckList';
+import CardList from './CardList/CardList';
+import EditPane from './EditPane/EditPane';
 
 export default function Browser() {
   const {deckId} = useParams()
@@ -21,40 +24,19 @@ export default function Browser() {
 
   return (
     <div className="edit-container">
-      <section className="deck-list">
-        <ul>
-          {subdecks.map((deck) => (
-            <li
-              className={selectedSubdeck === deck.id ? "selected" : ""}
-              key={deck.id}
-              onClick={() => selectSubdeck(deck.id)}
-            >
-              {deck.title}
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section className="card-list">
-        <ul>
-          {cards.map((card) => (
-            <li
-              className={selectedCard === card.id ? "selected" : ""}
-              key={card.id}
-              onClick={() => setSelectedCard(card.id)}
-            >
-              {card.text}
-            </li>
-          ))}
-        </ul>
-      </section>
-      <section className="edit-place">
-        <div className="front-section">
-          <h1>Text</h1>
-          <input type="text"></input>
-        </div>
-      </section>
+      <SubdeckList
+        subdecks={subdecks}
+        selectedSubdeck={selectedSubdeck}
+        selectSubdeck={selectSubdeck}
+      />
+      <CardList
+        cards={cards}
+        selectedCard={selectedCard}
+        setSelectedCard={setSelectedCard}
+      />
+      <EditPane/>
     </div>
-  )
+  );
 
   function selectFirstSubdeck(subdecks) {
     const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0)
