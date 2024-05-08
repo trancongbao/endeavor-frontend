@@ -1,0 +1,33 @@
+.card-area {
+    display: flex;
+    section {
+        padding: 20px;
+        border-right: 2px solid #000;
+    }
+    .deck-list {
+        width: 10%;
+    }
+    .card-list {
+        width: 50%;
+    }
+    .edit-place {
+        width: 40%;
+        input,
+        textarea {
+            width: 100%;
+        }
+    }
+    ul {
+        list-style: none;
+        li {
+            padding: 10px;
+            cursor: pointer;
+            &:hover {
+                background-color: #f0f0f0;
+            }
+        }
+    }
+    .selected {
+        background-color: yellow;
+    }
+}

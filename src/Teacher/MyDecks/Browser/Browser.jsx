@@ -3,8 +3,7 @@ import "./Browser.scss";
 import {rpc} from "../../../rpc/rpc"
 import {useParams} from "react-router-dom";
 import SubdeckList from './SubdeckList/SubdeckList';
-import CardList from './CardList/CardList';
-import EditPane from './EditPane/EditPane';
+import CardArea from './CardArea/CardArea';
 
 export default function Browser() {
   const {deckId} = useParams()
@@ -29,12 +28,11 @@ export default function Browser() {
         selectedSubdeck={selectedSubdeck}
         selectSubdeck={selectSubdeck}
       />
-      <CardList
+      <CardArea
         cards={cards}
         selectedCard={selectedCard}
         setSelectedCard={setSelectedCard}
       />
-      <EditPane/>
     </div>
   );
 
