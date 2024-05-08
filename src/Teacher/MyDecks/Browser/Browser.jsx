@@ -61,10 +61,8 @@ export default function Browser() {
   )
 
   function selectFirstSubdeck(subdecks) {
-    const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
-    if (firstSubdeckId) {
-      selectSubdeck(firstSubdeckId)
-    }
+    const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0)
+    selectSubdeck(firstSubdeck.id)
   }
 
   function selectSubdeck(subdeckId) {
@@ -77,7 +75,7 @@ export default function Browser() {
   }
 
   function selectFirstCard(cards) {
-    const firstCardId = cards.find((card) => card.order === 0).id
-    setSelectedCard(firstCardId)
+    const firstCard = cards.find((card) => card.order === 0)
+    setSelectedCard(firstCard.id)
   }
 }
