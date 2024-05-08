@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CardList from './CardList/CardList';
 import EditPane from './EditPane/EditPane';
 import "./CardArea.scss";
 
-export default function CardArea({ cards, selectedCard, setSelectedCard }) {
+export default function CardArea({cards}) {
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  useEffect(() => {
+    //Select the first card
+    const firstCard = cards.find((card) => card.order === 0)
+    firstCard && setSelectedCard(firstCard.id)
+  }, [cards]);
+
   return (
     <div className="card-area">
       <CardList
@@ -11,7 +19,7 @@ export default function CardArea({ cards, selectedCard, setSelectedCard }) {
         selectedCard={selectedCard}
         setSelectedCard={setSelectedCard}
       />
-      <EditPane />
+      <EditPane/>
     </div>
   );
 }

@@ -11,7 +11,6 @@ export default function Browser() {
   const [subdecks, setSubdecks] = useState([]);
   const [selectedSubdeck, setSelectedSubdeck] = useState(null);
   const [cards, setCards] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     rpc("teach", "getSubdecks", {id: deckId})
@@ -28,11 +27,7 @@ export default function Browser() {
         selectedSubdeck={selectedSubdeck}
         selectSubdeck={selectSubdeck}
       />
-      <CardArea
-        cards={cards}
-        selectedCard={selectedCard}
-        setSelectedCard={setSelectedCard}
-      />
+      <CardArea cards={cards}/>
     </div>
   );
 
@@ -46,12 +41,6 @@ export default function Browser() {
     rpc("teach", "getCards", {id: subdeckId})
     .then((cards) => {
       setCards(cards)
-      selectFirstCard(cards)
     })
-  }
-
-  function selectFirstCard(cards) {
-    const firstCard = cards.find((card) => card.order === 0)
-    setSelectedCard(firstCard.id)
   }
 }
