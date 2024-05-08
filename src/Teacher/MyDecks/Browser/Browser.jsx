@@ -67,17 +67,13 @@ export default function Browser() {
     }
   }
 
-  function selectSubdeck(id) {
-    setSelectedSubdeck(id)
-    getCards(id)
+  function selectSubdeck(subdeckId) {
+    setSelectedSubdeck(subdeckId)
+    rpc("teach", "getCards", {id: subdeckId})
     .then((cards) => {
       setCards(cards)
       selectFirstCard(cards)
     })
-  }
-
-  function getCards(subdeckId) {
-    return rpc("teach", "getCards", {id: subdeckId})
   }
 
   function selectFirstCard(cards) {
