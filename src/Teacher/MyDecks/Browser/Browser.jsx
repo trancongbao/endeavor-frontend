@@ -27,7 +27,7 @@ export default function Browser() {
             <li
               className={selectedSubdeck === deck.id ? "selected" : ""}
               key={deck.id}
-              onClick={(event) => selectSubdeck(event, deck.id)}
+              onClick={() => selectSubdeck(deck.id)}
             >
               {deck.title}
             </li>
@@ -40,7 +40,7 @@ export default function Browser() {
             <li
               className={selectedCard === card.id ? "selected" : ""}
               key={card.id}
-              onClick={(event) => selectCard(event, card.id)}
+              onClick={() => setSelectedCard(card.id)}
             >
               {card.text}
             </li>
@@ -61,38 +61,21 @@ export default function Browser() {
   )
 
   function selectFirstSubdeck(subdecks) {
-    const firstSubdeckId = subdecks.find((subdeck) => subdeck.order === 0).id
-    if (firstSubdeckId) {
-      setSelectedSubdeck(firstSubdeckId)
-      getCards(firstSubdeckId)
-      .then((cards) => {
-        setCards(cards)
-        selectFirstCard(cards)
-      })
-    }
+    const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0)
+    selectSubdeck(firstSubdeck.id)
   }
 
-  function selectSubdeck(event, id) {
-    event.preventDefault();
-    setSelectedSubdeck(id)
-    getCards(id)
+  function selectSubdeck(subdeckId) {
+    setSelectedSubdeck(subdeckId)
+    rpc("teach", "getCards", {id: subdeckId})
     .then((cards) => {
       setCards(cards)
       selectFirstCard(cards)
     })
   }
 
-  function getCards(subdeckId) {
-    return rpc("teach", "getCards", {id: subdeckId})
-  }
-
   function selectFirstCard(cards) {
-    const firstCardId = cards.find((card) => card.order === 0).id
-    setSelectedCard(firstCardId)
-  }
-
-  function selectCard(event, id) {
-    event.preventDefault();
-    setSelectedCard(id);
+    const firstCard = cards.find((card) => card.order === 0)
+    setSelectedCard(firstCard.id)
   }
 }
