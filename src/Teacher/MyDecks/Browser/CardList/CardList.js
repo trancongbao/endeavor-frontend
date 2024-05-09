@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import EditPane from './EditPane/EditPane';
-import "./CardArea.scss";
+import "./CardList.scss";
 
-export default function CardArea({cards}) {
+export default function CardList({cards}) {
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {

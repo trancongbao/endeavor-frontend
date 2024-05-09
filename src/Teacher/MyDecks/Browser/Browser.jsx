@@ -3,7 +3,7 @@ import "./Browser.scss";
 import {rpc} from "../../../rpc/rpc"
 import {useParams} from "react-router-dom";
 import SubdeckList from './SubdeckList/SubdeckList';
-import CardArea from './CardArea/CardArea';
+import CardList from './CardList/CardList';
 
 export default function Browser() {
   const {deckId} = useParams()
@@ -27,7 +27,7 @@ export default function Browser() {
         selectedSubdeck={selectedSubdeck}
         selectSubdeck={selectSubdeck}
       />
-      <CardArea cards={cards}/>
+      <CardList cards={cards}/>
     </div>
   );
 
