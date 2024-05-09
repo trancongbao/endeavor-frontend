@@ -49,7 +49,7 @@ export default function App() {
   }, []);
 
   if (isLoggedIn === null) {
-    return <div>Loading...</div>; // Render a loading screen until authentication is checked
+    return <div>Authentication check...</div>; // Render a loading screen until authentication is checked
   }
 
   return (
