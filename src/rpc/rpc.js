@@ -1,7 +1,7 @@
 export {rpc}
 
 async function rpc(path, rpcMethod, rpcParams) {
-  console.log(rpcParams)
+  console.log(`rpc. path: ${path}, rpcMethod: ${rpcMethod}, rpcParams: ${rpcParams}`)
   return fetch(
     `http://localhost:3000/${path}`,
     {

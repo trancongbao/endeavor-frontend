@@ -31,17 +31,12 @@ export default function App() {
             }),
           }
         )
-        console.log(response)
         if (response.ok) {
           const body = await response.json();
-          console.log(body)
           const result = body.result
-          console.log(result)
           if (result) {
-            console.log("setIsLoggedIn to true")
             setIsLoggedIn(true);
             setUsername(result.username)
-            console.log("isLoggedIn: ", isLoggedIn)
           }
         } else {
           console.error('Calling /currentUser failed: ', response.statusText);
