@@ -1,4 +1,4 @@
-export default function EditPane({card}) {
+export default function Card({card}) {
   return (
     <section className="edit-place">
       <div className="front-section">

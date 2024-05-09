@@ -1,4 +1,4 @@
-export default function PreviewPane({card}) {
+export default function Preview({card}) {
   return (
     <section className="preview-pane">
       <div className="front-section">

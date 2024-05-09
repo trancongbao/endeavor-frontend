@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import EditPane from './EditPane/EditPane';
+import Card from './Card/Card';
 import "./CardList.scss";
 import {rpc} from "../../../../rpc/rpc";
 
@@ -33,7 +33,7 @@ export default function CardList({subdeckId}) {
         </ul>
       </section>
 
-      <EditPane card={selectedCard}/>
+      <Card card={selectedCard}/>
     </div>
   );
 }
