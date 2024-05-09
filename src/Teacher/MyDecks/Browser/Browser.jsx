@@ -14,7 +14,9 @@ export default function Browser() {
     rpc("teach", "getSubdecks", {id: deckId})
     .then((subdecks) => {
       setSubdecks(subdecks)
-      selectFirstSubdeck(subdecks)
+      //Select the first subdeck
+      const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0)
+      setSelectedSubdeck(firstSubdeck.id)
     })
   }, [])
 
@@ -26,7 +28,7 @@ export default function Browser() {
             <li
               className={selectedSubdeck === deck.id ? "selected" : ""}
               key={deck.id}
-              onClick={() => selectSubdeck(deck.id)}
+              onClick={() => setSelectedSubdeck(deck.id)}
             >
               {deck.title}
             </li>
@@ -37,13 +39,4 @@ export default function Browser() {
       <CardList subdeckId={selectedSubdeck}/>
     </div>
   );
-
-  function selectFirstSubdeck(subdecks) {
-    const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0)
-    selectSubdeck(firstSubdeck.id)
-  }
-
-  function selectSubdeck(subdeckId) {
-    setSelectedSubdeck(subdeckId)
-  }
 }
