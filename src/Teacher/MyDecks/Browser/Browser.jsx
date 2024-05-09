@@ -20,7 +20,7 @@ export default function Browser() {
   }, [])
 
   return (
-    <div className="edit-container">
+    <div className="browser">
       <section className="deck-list">
         <ul>
           {subdecks.map((deck) => (
