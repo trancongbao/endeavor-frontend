@@ -9,7 +9,6 @@ export default function Browser() {
 
   const [subdecks, setSubdecks] = useState([]);
   const [selectedSubdeck, setSelectedSubdeck] = useState(null);
-  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     rpc("teach", "getSubdecks", {id: deckId})
@@ -35,7 +34,7 @@ export default function Browser() {
         </ul>
       </section>
 
-      <CardList cards={cards}/>
+      <CardList subdeckId={selectedSubdeck}/>
     </div>
   );
 
@@ -46,9 +45,5 @@ export default function Browser() {
 
   function selectSubdeck(subdeckId) {
     setSelectedSubdeck(subdeckId)
-    rpc("teach", "getCards", {id: subdeckId})
-    .then((cards) => {
-      setCards(cards)
-    })
   }
 }
