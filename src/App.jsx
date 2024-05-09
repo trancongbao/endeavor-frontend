@@ -30,6 +30,7 @@ export default function App() {
     return <div>Authentication check...</div>; // Render a loading screen until authentication is checked
   }
 
+  //TODO: navigate to the page appropriate to the userType
   return (
     <React.Fragment>
       <BrowserRouter>
