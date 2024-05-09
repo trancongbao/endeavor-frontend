@@ -8,54 +8,29 @@ import React, {useEffect, useState} from "react";
 import Teacher from "./Teacher/Teacher";
 import DeckBrowser from "./Teacher/MyDecks/Browser/Browser";
 import Login from "./Login/Login";
+import {rpc} from "./rpc/rpc";
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
   const [username, setUsername] = useState('')
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const currentUser = async () => {
-      try {
-        const response = await fetch(
-          'http://localhost:3000/auth',
-          {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              method: "currentUser",
-              params: {}
-            }),
-          }
-        )
-        if (response.ok) {
-          const body = await response.json();
-          const result = body.result
-          if (result) {
-            setIsLoggedIn(true);
-            setUsername(result.username)
-          }
-        } else {
-          console.error('Calling /currentUser failed: ', response.statusText);
-        }
-      } catch (error) {
-        console.error('Error checking cookie:', error);
-      } finally {
-        setLoading(false);
+    rpc("auth", "currentUser", {})
+    .then((user) => {
+      if (user) {
+        setUsername(user.username)
+        setIsLoggedIn(true)
+      } else {
+        setIsLoggedIn(false)
       }
-    };
-
-    currentUser();
+    })
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>; // Render a loading screen until authentication is checked
+  if (isLoggedIn === null) {
+    return <div>Authentication check...</div>; //Render a loading screen until authentication is checked
   }
 
-
+  //TODO: navigate to the page appropriate to the userType
   return (
     <React.Fragment>
       <BrowserRouter>
