@@ -3,7 +3,7 @@ export default function EditPane({card}) {
     <section className="edit-place">
       <div className="front-section">
         <h1>Text</h1>
-        <input type="text" value={card ? card.text : ""}/>
+        <input type="text" defaultValue={card ? card.text : ""}/>
       </div>
     </section>
   );
