@@ -10,9 +10,8 @@ import DeckBrowser from "./Teacher/MyDecks/Browser/Browser";
 import Login from "./Login/Login";
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(null)
   const [username, setUsername] = useState('')
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const currentUser = async () => {
@@ -43,18 +42,15 @@ export default function App() {
         }
       } catch (error) {
         console.error('Error checking cookie:', error);
-      } finally {
-        setLoading(false);
       }
     };
 
     currentUser();
   }, []);
 
-  if (loading) {
+  if (isLoggedIn === null) {
     return <div>Loading...</div>; // Render a loading screen until authentication is checked
   }
-
 
   return (
     <React.Fragment>
