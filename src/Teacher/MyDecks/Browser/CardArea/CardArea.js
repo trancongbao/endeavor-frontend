@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import CardList from './CardList/CardList';
 import EditPane from './EditPane/EditPane';
 import "./CardArea.scss";
 
@@ -14,11 +13,20 @@ export default function CardArea({cards}) {
 
   return (
     <div className="card-area">
-      <CardList
-        cards={cards}
-        selectedCard={selectedCard}
-        setSelectedCard={setSelectedCard}
-      />
+      <section className="card-list">
+        <ul>
+          {cards.map((card) => (
+            <li
+              className={selectedCard === card ? "selected" : ""}
+              key={card.id}
+              onClick={() => setSelectedCard(card)}
+            >
+              {card.text}
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <EditPane card={selectedCard}/>
     </div>
   );
