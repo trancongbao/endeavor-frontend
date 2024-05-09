@@ -27,7 +27,7 @@ export default function App() {
   }, []);
 
   if (isLoggedIn === null) {
-    return <div>Authentication check...</div>; // Render a loading screen until authentication is checked
+    return <div>Authentication check...</div>; //Render a loading screen until authentication is checked
   }
 
   //TODO: navigate to the page appropriate to the userType
