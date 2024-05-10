@@ -3,12 +3,12 @@ import './SideBar.scss';
 import SideBarLogo from "./Logo/SideBarLogo";
 import SideBarMenu from "./Menu/SideBarMenu";
 
-export default function SideBar() {
+export default function SideBar({setIsLoggedIn}) {
   return (
     <div className="side-bar active">
       <SideBarLogo/>
 
-      <SideBarProfile isShowAccountButton={false} isOpenUserProfile={true}/>
+      <SideBarProfile isShowAccountButton={false} isOpenUserProfile={true} setIsLoggedIn={setIsLoggedIn}/>
 
       <SideBarMenu/>
     </div>
