@@ -20,12 +20,12 @@ export default function Profile({setIsLoggedIn}) {
       </div>
 
       <div className="flex-btn">
-        <a className="option-btn">
+        <div className="option-btn">
           Profile
-        </a>
-        <a className="option-btn" onClick={logout}>
+        </div>
+        <div className="option-btn" onClick={logout}>
           Logout
-        </a>
+        </div>
       </div>
     </div>
   );
