@@ -38,7 +38,7 @@ export default function App() {
         <Routes>
           {/* Routes for home/login page */}
           <Route path="/" element={<Navigate to="/login"/>}/>
-          <Route path="/login" element={<Login setLoggedIn={setIsLoggedIn} setUsername={setUser}/>}/>
+          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUser}/>}/>
 
           {/* Routes for teacher */}
           <Route path="/teacher" element={isLoggedIn ? <Teacher/> : <Navigate to="/login"/>}>
