@@ -32,23 +32,24 @@ export default function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
-        {authenticatedUser.username &&
+        {/* Sidebar */}
+        {authenticatedUser.userType &&
           <SideBar authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser}/>}
         <Routes>
           {/* Routes for home page */}
-          <Route path="/" element={<Navigate to={`/${authenticatedUser.userType}`}/>}/>
-
-          {/* Routes for login */}
-          <Route path="/login" element={<Login setAuthenticatedUser={setAuthenticatedUser}/>}/>
+          <Route path="/"
+                 element={authenticatedUser.userType ? <Navigate to={`/${authenticatedUser.userType}`}/>
+                   : <Login setAuthenticatedUser={setAuthenticatedUser}/>}
+          />
 
           {/* Routes for teacher */}
-          <Route path="/teacher" element={(authenticatedUser.username) ? <Teacher/> : <Navigate to="/login"/>}>
+          <Route path="/teacher" element={(authenticatedUser.userType) ? <Teacher/> : <Navigate to="/"/>}>
             <Route index element={<Navigate to="my-decks"/>}/>
             <Route path="my-decks" element={<MyDecks isTeacher={true}/>}/>
             <Route end path={`my-decks/:deckId`} element={<DeckBrowser/>}/>
           </Route>
 
-          {/* Routes for teacher */}
+          {/* Routes for student */}
           <Route path="/student" element={<Student/>}>
             <Route path="my-decks" element={<MyDecks isTeacher={false}/>}/>
             <Route index element={<Navigate to="my-decks"/>}/>
