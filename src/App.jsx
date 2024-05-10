@@ -41,11 +41,9 @@ export default function App() {
           <Route path="/*"
                  element={authenticatedUser.userType ? null : <Login setAuthenticatedUser={setAuthenticatedUser}/>}/>
 
-          {/* Routes for home page */}
+          {/* Access to roots url is redirected to user url based on user type */}
           <Route path="/"
-                 element={authenticatedUser.userType
-                   ? <Navigate to={`/${authenticatedUser.userType}`}/>
-                   : <Login setAuthenticatedUser={setAuthenticatedUser}/>}
+                 element={<Navigate to={`/${authenticatedUser.userType}`}/>}
           />
 
           {/* Routes for teacher */}
