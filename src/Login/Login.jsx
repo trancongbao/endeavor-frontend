@@ -1,38 +1,25 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
+import {rpc} from "../rpc/rpc";
 
-export default function Login(props) {
+export default function Login({setIsLoggedIn}) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [emailError, setEmailError] = useState('')
-  const [passwordError, setPasswordError] = useState('')
 
   const navigate = useNavigate()
 
   const login = () => {
-    fetch('http://localhost:3000/auth', {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        method: "login",
-        params: {
-          userType: "teacher",
-          username: username,
-          password: password
-        }
-      }),
+    rpc("auth", "login", {
+      userType: "teacher", //TODO
+      username: username,
+      password: password
     })
-    .then((response) => response.json())
-    .then((response) => {
-      if (response.result) {
-        console.log(response.result)
-        props.setIsLoggedIn(true)
-        navigate('/teacher')
+    .then((user) => {
+      if (user) {
+        setIsLoggedIn(true)
+        navigate('/teacher') //TODO
       } else {
-        window.alert('Wrong email or password')
+        alert('Wrong email or password')
       }
     })
   }
@@ -46,7 +33,6 @@ export default function Login(props) {
           onChange={(event) => setUsername(event.target.value)}
           className={'inputBox'}
         />
-        <label className="errorLabel">{emailError}</label>
       </div>
       <br/>
       <div className={'inputContainer'}>
@@ -56,7 +42,6 @@ export default function Login(props) {
           onChange={(ev) => setPassword(ev.target.value)}
           className={'inputBox'}
         />
-        <label className="errorLabel">{passwordError}</label>
       </div>
       <br/>
       <div className={'inputContainer'}>
