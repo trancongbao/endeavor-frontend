@@ -12,13 +12,13 @@ import {rpc} from "./rpc/rpc";
 
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null)
-  const [username, setUsername] = useState('')
+  const [user, setUser] = useState('')
 
   useEffect(() => {
     rpc("auth", "currentUser", {})
     .then((user) => {
       if (user) {
-        setUsername(user.username)
+        setUser(user)
         setIsLoggedIn(true)
       } else {
         setIsLoggedIn(false)
@@ -34,11 +34,11 @@ export default function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
-        <SideBar setIsLoggedIn={setIsLoggedIn}/>
+        <SideBar user={user} setIsLoggedIn={setIsLoggedIn}/>
         <Routes>
           {/* Routes for home/login page */}
           <Route path="/" element={<Navigate to="/login"/>}/>
-          <Route path="/login" element={<Login setLoggedIn={setIsLoggedIn} setUsername={setUsername}/>}/>
+          <Route path="/login" element={<Login setLoggedIn={setIsLoggedIn} setUsername={setUser}/>}/>
 
           {/* Routes for teacher */}
           <Route path="/teacher" element={isLoggedIn ? <Teacher/> : <Navigate to="/login"/>}>

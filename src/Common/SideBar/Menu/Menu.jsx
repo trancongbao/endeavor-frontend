@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-const SideBarMenu = () => {
+const Menu = () => {
   return (
     <nav className="navbar">
       <NavLink
@@ -39,4 +39,4 @@ const SideBarMenu = () => {
     </nav>
   );
 };
-export default SideBarMenu;
+export default Menu;
