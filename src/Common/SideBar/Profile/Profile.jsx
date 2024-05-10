@@ -16,7 +16,7 @@ export default function Profile({user, setIsLoggedIn}) {
         <div className="option-btn" onClick={logout}>Logout</div>
       </div>
     </div>
-  );
+  )
 
   function logout() {
     rpc("auth", "logout", {})
