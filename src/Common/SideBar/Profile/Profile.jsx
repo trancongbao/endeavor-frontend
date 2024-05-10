@@ -9,7 +9,7 @@ export default function Profile({user, setIsLoggedIn}) {
            alt=""/>
       <h3>{user.username}</h3>
       <div>{user.userType.toUpperCase()}</div>
-      <div>Level: 5</div>
+      {user.level && <div>Level: ${user.level}</div>}
 
       <div className="flex-btn">
         <div className="option-btn" onClick={profile}>Profile</div>
