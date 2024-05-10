@@ -8,14 +8,14 @@ export default function CardList({subdeckId}) {
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-    rpc("teach", "getCards", {id: subdeckId})
+    subdeckId && rpc("teach", "getCards", {id: subdeckId})
     .then((cards) => {
       setCards(cards)
       //Select the first card
       const firstCard = cards.find((card) => card.order === 0)
       firstCard && setSelectedCard(firstCard)
     })
-  }, [subdeckId]);
+  }, [subdeckId])
 
   return (
     <div className="card-area">
