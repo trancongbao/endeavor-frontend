@@ -35,19 +35,28 @@ export default function App() {
         {/* Sidebar */}
         {authenticatedUser.userType &&
           <SideBar authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser}/>}
+
         <Routes>
+          {/* Wildcard route for handling all paths */}
+          <Route path="/*"
+                 element={authenticatedUser.userType ? null : <Login setAuthenticatedUser={setAuthenticatedUser}/>}/>
+
           {/* Routes for home page */}
           <Route path="/"
-                 element={authenticatedUser.userType ? <Navigate to={`/${authenticatedUser.userType}`}/>
+                 element={authenticatedUser.userType
+                   ? <Navigate to={`/${authenticatedUser.userType}`}/>
                    : <Login setAuthenticatedUser={setAuthenticatedUser}/>}
           />
 
           {/* Routes for teacher */}
-          <Route path="/teacher" element={(authenticatedUser.userType) ? <Teacher/> : <Navigate to="/"/>}>
-            <Route index element={<Navigate to="my-decks"/>}/>
-            <Route path="my-decks" element={<MyDecks isTeacher={true}/>}/>
-            <Route end path={`my-decks/:deckId`} element={<DeckBrowser/>}/>
-          </Route>
+          {authenticatedUser.userType === 'teacher' &&
+            <Route path="/teacher" element={<Teacher/>}>
+              <Route index element={<Navigate to="my-decks"/>}/>
+              <Route path="my-decks" element={<MyDecks isTeacher={true}/>}/>
+              <Route end path={`my-decks/:deckId`} element={<DeckBrowser/>}/>
+            </Route>
+          }
+
 
           {/* Routes for student */}
           <Route path="/student" element={<Student/>}>
