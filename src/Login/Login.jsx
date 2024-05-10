@@ -10,7 +10,7 @@ export default function Login({setIsLoggedIn}) {
 
   const login = () => {
     rpc("auth", "login", {
-      userType: "teacher", //TODO
+      userType: "teacher", //TODO: home page
       username: username,
       password: password
     })
