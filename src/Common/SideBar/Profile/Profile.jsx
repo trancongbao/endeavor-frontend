@@ -1,4 +1,4 @@
-import './SideBarProfile.scss';
+import './Profile.scss';
 import {rpc} from "../../../rpc/rpc";
 
 export default function Profile({setIsLoggedIn}) {
