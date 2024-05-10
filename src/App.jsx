@@ -11,7 +11,11 @@ import Login from "./Login/Login";
 import {rpc} from "./rpc/rpc";
 
 export default function App() {
-  //const [isLoggedIn, setIsLoggedIn] = useState(null)
+  /**
+   * `authenticatedUser` equals `null` means authentication has not been checked
+   * `authenticatedUser` equals `{}` means there is no authenticated session
+   *  if there is a session, `authenticatedUser` is set to the authenticated user
+   * */
   const [authenticatedUser, setAuthenticatedUser] = useState(null)
 
   useEffect(() => {
@@ -28,7 +32,8 @@ export default function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
-        {authenticatedUser.username && <SideBar authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser}/>}
+        {authenticatedUser.username &&
+          <SideBar authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser}/>}
         <Routes>
           {/* Routes for home/login page */}
           <Route path="/" element={<Navigate to="/login"/>}/>
