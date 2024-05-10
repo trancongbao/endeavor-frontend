@@ -39,7 +39,7 @@ export default function Login({setIsLoggedIn}) {
         <input
           value={password}
           placeholder="Enter your password here"
-          onChange={(ev) => setPassword(ev.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
           className={'inputBox'}
         />
       </div>
