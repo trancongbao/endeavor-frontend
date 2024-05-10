@@ -34,7 +34,7 @@ export default function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
-        <SideBar setIsLoggedIn={setIsLoggedIn}/>
+        <SideBar username={username} setIsLoggedIn={setIsLoggedIn}/>
         <Routes>
           {/* Routes for home/login page */}
           <Route path="/" element={<Navigate to="/login"/>}/>
