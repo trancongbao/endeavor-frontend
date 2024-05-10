@@ -28,7 +28,6 @@ export default function App() {
     return <div></div>; //Render an invisible screen until authentication is checked
   }
 
-  //TODO: remember the desired destination
   return (
     <React.Fragment>
       <BrowserRouter>
