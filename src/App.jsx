@@ -37,7 +37,7 @@ export default function App() {
           <SideBar authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser}/>}
 
         <Routes>
-          {/* Wildcard route for handling all paths */}
+          {/* For all paths, show the login screen when there is no authenticated session */}
           <Route path="/*"
                  element={authenticatedUser.userType ? null : <Login setAuthenticatedUser={setAuthenticatedUser}/>}/>
 
