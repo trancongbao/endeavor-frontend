@@ -28,15 +28,17 @@ export default function App() {
     return <div></div>; //Render an invisible screen until authentication is checked
   }
 
-  //TODO: navigate to the page appropriate to the userType
+  //TODO: remember the desired destination
   return (
     <React.Fragment>
       <BrowserRouter>
         {authenticatedUser.username &&
           <SideBar authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser}/>}
         <Routes>
-          {/* Routes for home/login page */}
-          <Route path="/" element={<Navigate to="/login"/>}/>
+          {/* Routes for home page */}
+          <Route path="/" element={<Navigate to={`/${authenticatedUser.userType}`}/>}/>
+
+          {/* Routes for login */}
           <Route path="/login" element={<Login setAuthenticatedUser={setAuthenticatedUser}/>}/>
 
           {/* Routes for teacher */}
