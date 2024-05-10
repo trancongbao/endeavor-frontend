@@ -3,19 +3,19 @@ import Card from './Card/Card';
 import "./CardList.scss";
 import {rpc} from "../../../../rpc/rpc";
 
-export default function CardList({subdeckId}) {
+export default function CardList({selectedSubdeck}) {
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-    subdeckId && rpc("teach", "getCards", {id: subdeckId})
+    selectedSubdeck && rpc("teach", "getCards", {id: selectedSubdeck.id})
     .then((cards) => {
       setCards(cards)
       //Select the first card
       const firstCard = cards.find((card) => card.order === 0)
       firstCard && setSelectedCard(firstCard)
     })
-  }, [subdeckId])
+  }, [selectedSubdeck])
 
   return (
     <div className="card-area">
@@ -23,7 +23,7 @@ export default function CardList({subdeckId}) {
         <ul>
           {cards.map((card) => (
             <li
-              className={selectedCard === card ? "selected" : ""}
+              className={card === selectedCard ? "selected" : ""}
               key={card.id}
               onClick={() => setSelectedCard(card)}
             >
