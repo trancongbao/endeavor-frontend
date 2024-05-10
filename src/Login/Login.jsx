@@ -17,7 +17,7 @@ export default function Login({setIsLoggedIn}) {
     .then((user) => {
       if (user) {
         setIsLoggedIn(true)
-        navigate('/teacher') //TODO
+        navigate('/teacher') //TODO: redirect to desired destination
       } else {
         alert('Wrong email or password')
       }
