@@ -54,7 +54,6 @@ export default function App() {
             </Route>
           }
 
-
           {/* Routes for student */}
           <Route path="/student" element={<Student/>}>
             <Route path="my-decks" element={<MyDecks isTeacher={false}/>}/>
