@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 import {rpc} from "../rpc/rpc";
 
-export default function Login({setIsLoggedIn}) {
+export default function Login({setAuthenticatedUser}) {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
@@ -16,7 +16,7 @@ export default function Login({setIsLoggedIn}) {
     })
     .then((user) => {
       if (user) {
-        setIsLoggedIn(true)
+        setAuthenticatedUser(user)
         navigate('/teacher') //TODO: redirect to desired destination
       } else {
         alert('Wrong email or password')

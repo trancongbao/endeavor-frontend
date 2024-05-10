@@ -11,22 +11,16 @@ import Login from "./Login/Login";
 import {rpc} from "./rpc/rpc";
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(null)
-  const [user, setUser] = useState('')
+  //const [isLoggedIn, setIsLoggedIn] = useState(null)
+  const [authenticatedUser, setAuthenticatedUser] = useState(null)
 
   useEffect(() => {
-    rpc("auth", "currentUser", {})
-    .then((user) => {
-      if (user) {
-        setUser(user)
-        setIsLoggedIn(true)
-      } else {
-        setIsLoggedIn(false)
-      }
-    })
+    rpc("auth", "currentUser", {}).then((user) =>
+      setAuthenticatedUser(user)
+    )
   }, []);
 
-  if (isLoggedIn === null) {
+  if (authenticatedUser === null) {
     return <div>Authentication check...</div>; //Render a loading screen until authentication is checked
   }
 
@@ -34,14 +28,14 @@ export default function App() {
   return (
     <React.Fragment>
       <BrowserRouter>
-        <SideBar user={user} setIsLoggedIn={setIsLoggedIn}/>
+        {authenticatedUser.username && <SideBar authenticatedUser={authenticatedUser} setAuthenticatedUser={setAuthenticatedUser}/>}
         <Routes>
           {/* Routes for home/login page */}
           <Route path="/" element={<Navigate to="/login"/>}/>
-          <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUsername={setUser}/>}/>
+          <Route path="/login" element={<Login setAuthenticatedUser={setAuthenticatedUser}/>}/>
 
           {/* Routes for teacher */}
-          <Route path="/teacher" element={isLoggedIn ? <Teacher/> : <Navigate to="/login"/>}>
+          <Route path="/teacher" element={(authenticatedUser.username) ? <Teacher/> : <Navigate to="/login"/>}>
             <Route index element={<Navigate to="my-decks"/>}/>
             <Route path="my-decks" element={<MyDecks isTeacher={true}/>}/>
             <Route end path={`my-decks/:deckId`} element={<DeckBrowser/>}/>
