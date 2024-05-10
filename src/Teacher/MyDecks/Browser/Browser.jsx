@@ -16,7 +16,7 @@ export default function Browser() {
       setSubdecks(subdecks)
       //Select the first subdeck
       const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0)
-      setSelectedSubdeck(firstSubdeck.id)
+      setSelectedSubdeck(firstSubdeck)
     })
   }, [])
 
@@ -24,19 +24,20 @@ export default function Browser() {
     <div className="browser">
       <section className="deck-list">
         <ul>
-          {subdecks.map((deck) => (
+          {subdecks.map((subdeck) => (
             <li
-              className={selectedSubdeck === deck.id ? "selected" : ""}
-              key={deck.id}
-              onClick={() => setSelectedSubdeck(deck.id)}
+              className={subdeck === selectedSubdeck ? "selected" : ""}
+              key={subdeck.id}
+              onClick={() => setSelectedSubdeck(subdeck)}
             >
-              {deck.title}
+              {subdeck.title}
             </li>
           ))}
         </ul>
       </section>
 
-      <CardList subdeckId={selectedSubdeck}/>
+      {/* Render `CardList` only when `selectedSubdeck` is defined */}
+      {selectedSubdeck && <CardList selectedSubdeck={selectedSubdeck}/>}
     </div>
   );
 }
