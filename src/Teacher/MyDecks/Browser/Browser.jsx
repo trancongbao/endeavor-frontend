@@ -17,11 +17,12 @@ export default function Browser() {
       const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0);
       setSelectedSubdeck(firstSubdeck);
     });
-  }, [deckId]);
+  }, []);
 
   return (
     <div className="browser">
       <section className="deck-list">
+        <div className="margin-block"></div>
         <ul>
           {subdecks.map((subdeck) => (
             <li

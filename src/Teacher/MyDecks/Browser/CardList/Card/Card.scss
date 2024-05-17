@@ -4,8 +4,26 @@
     textarea {
         width: 100%;
     }
+
     .front-section {
         font-size: 25px;
         text-align: center;
+        margin-bottom: 20px;
+    }
+    .btns {
+        display: flex;
+        justify-content: space-between;
+        .edit-card-btn {
+            margin-bottom: 10px;
+            background-color: var(--red) !important;
+        }
+    }
+
+    .back-section {
+        padding: 30px;
+        font-size: 20px;
+        .word-line {
+            padding: 10px;
+        }
     }
 }

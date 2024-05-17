@@ -13,9 +13,9 @@ export default function DeckTile({ deck }) {
           </tr>
         </thead>
         <tbody className="table-body">
-          {deck.subDecks.map((subDeck) => (
+          {deck.subdecks.map((subDeck) => (
             <tr className="body-row" key={subDeck.id}>
-              <td className="row-title">{subDeck.title}</td>
+              <td className="row-title">{subDeck.subdeck_title}</td>
             </tr>
           ))}
         </tbody>

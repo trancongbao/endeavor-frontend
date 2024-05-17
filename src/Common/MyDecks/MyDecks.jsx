@@ -40,7 +40,7 @@ function getMyDecks() {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      method: 'getMyDecks',
+      method: 'getDecks',
       params: {},
     }),
   })
