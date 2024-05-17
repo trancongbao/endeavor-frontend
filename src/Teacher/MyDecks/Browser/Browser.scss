@@ -1,27 +1,28 @@
 .browser {
     display: flex;
     section {
-        padding: 20px;
+        padding-right: 10px;
+        padding-left: 10px;
         border-right: 2px solid #000;
     }
     .deck-list {
         width: 10%;
-    }
-    .card-list {
-        width: 50%;
+        .margin-block {
+            margin-top: 65px;
+        }
+        ul {
+            list-style: none;
+            li {
+                padding: 10px;
+                cursor: pointer;
+                &:hover {
+                    background-color: #f0f0f0;
+                }
+            }
+        }
     }
     .bold-text {
         color: var(--main-color);
-    }
-    ul {
-        list-style: none;
-        li {
-            padding: 10px;
-            cursor: pointer;
-            &:hover {
-                background-color: #f0f0f0;
-            }
-        }
     }
     .selected {
         background-color: yellow;

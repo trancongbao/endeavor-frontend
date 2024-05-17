@@ -1,21 +1,21 @@
 .card-area {
     display: flex;
     width: 100%;
-    section {
-        // padding: 20px;
+    .card-list {
+        width: 50%;
         border-right: 2px solid #000;
-    }
-    ul {
-        list-style: none;
-        li {
-            padding: 10px;
-            cursor: pointer;
-            &:hover {
-                background-color: #f0f0f0;
+        .add-card-btn {
+            margin-bottom: 10px;
+        }
+        ul {
+            list-style: none;
+            li {
+                padding: 10px;
+                cursor: pointer;
+                &:hover {
+                    background-color: #f0f0f0;
+                }
             }
         }
-    }
-    .selected {
-        background-color: yellow;
     }
 }

@@ -19,7 +19,7 @@ export default function CardList({ selectedSubdeck }) {
   return (
     <div className="card-area">
       <section className="card-list">
-        {/* <button className="inline-btn add-card-btn">Add Card</button> */}
+        <button className="inline-btn add-card-btn">Add Card</button>
         <ul>
           {cards.map((card) => (
             <li
