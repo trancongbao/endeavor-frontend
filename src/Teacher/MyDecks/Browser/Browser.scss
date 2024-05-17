@@ -10,12 +10,8 @@
     .card-list {
         width: 50%;
     }
-    .edit-place {
-        width: 40%;
-        input,
-        textarea {
-            width: 100%;
-        }
+    .bold-text {
+        color: var(--main-color);
     }
     ul {
         list-style: none;

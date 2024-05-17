@@ -1,28 +1,27 @@
-import React, {useState} from 'react'
-import {useNavigate} from 'react-router-dom'
-import {rpc} from "../rpc/rpc";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { rpc } from '../rpc/rpc';
 
-export default function Login({setAuthenticatedUser}) {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+export default function Login({ setAuthenticatedUser }) {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const login = () => {
-    rpc("auth", "login", {
-      userType: "teacher", //TODO: home page
+    rpc('auth', 'login', {
+      userType: 'teacher', //TODO: home page
       username: username,
-      password: password
-    })
-    .then((user) => {
+      password: password,
+    }).then((user) => {
       if (user) {
-        setAuthenticatedUser(user)
-        navigate('/teacher') //TODO: redirect to desired destination
+        setAuthenticatedUser(user);
+        navigate('/teacher'); //TODO: redirect to desired destination
       } else {
-        alert('Wrong email or password')
+        alert('Wrong email or password');
       }
-    })
-  }
+    });
+  };
 
   return (
     <div className={'mainContainer'}>
@@ -34,7 +33,7 @@ export default function Login({setAuthenticatedUser}) {
           className={'inputBox'}
         />
       </div>
-      <br/>
+      <br />
       <div className={'inputContainer'}>
         <input
           value={password}
@@ -43,10 +42,15 @@ export default function Login({setAuthenticatedUser}) {
           className={'inputBox'}
         />
       </div>
-      <br/>
+      <br />
       <div className={'inputContainer'}>
-        <input className={'inputButton'} type="button" onClick={login} value={'Log in'}/>
+        <input
+          className={'inputButton'}
+          type="button"
+          onClick={login}
+          value={'Log in'}
+        />
       </div>
     </div>
-  )
+  );
 }
