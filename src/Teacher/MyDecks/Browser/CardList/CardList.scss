@@ -1,21 +1,9 @@
 .card-area {
     display: flex;
+    width: 100%;
     section {
-        padding: 20px;
+        // padding: 20px;
         border-right: 2px solid #000;
-    }
-    .deck-list {
-        width: 10%;
-    }
-    .card-list {
-        width: 50%;
-    }
-    .edit-place {
-        width: 40%;
-        input,
-        textarea {
-            width: 100%;
-        }
     }
     ul {
         list-style: none;

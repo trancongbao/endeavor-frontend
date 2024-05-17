@@ -1,8 +1,8 @@
-import { useParams, NavLink } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import "./DeckStudy.scss";
-import Card from "./Card/Card";
-import StudyFinish from "./StudyFinish/StudyFinish";
+import { useParams, NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import './DeckStudy.scss';
+import Card from './Card/Card';
+import StudyFinish from './StudyFinish/StudyFinish';
 
 export default function DeckStudy() {
   const { deckId } = useParams();
@@ -15,7 +15,7 @@ export default function DeckStudy() {
         setCards(data.cards);
       })
       .catch((error) => {
-        console.error("Error fetching cards:", error.message);
+        console.error('Error fetching cards:', error.message);
       });
   }, []);
 
@@ -42,12 +42,12 @@ const getCards = (deckId) => {
   return fetch(url)
     .then((response) => {
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error('Network response was not ok');
       }
       return response.json();
     })
     .catch((error) => {
-      console.error("Error fetching decks:", error.message);
+      console.error('Error fetching decks:', error.message);
       throw error;
     });
 };

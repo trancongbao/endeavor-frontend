@@ -1,10 +1,15 @@
-export default function Card({card}) {
+import './Card.scss';
+import { boldNewWord } from '../../../../../Common/Utils';
+
+export default function Card({ card }) {
   return (
     <section className="edit-place">
-      <div className="front-section">
-        <h1>Text</h1>
-        <input type="text" defaultValue={card ? card.text : ""}/>
-      </div>
+      <div
+        className="front-section"
+        dangerouslySetInnerHTML={{
+          __html: card ? boldNewWord(card.text) : '',
+        }}
+      ></div>
     </section>
   );
 }

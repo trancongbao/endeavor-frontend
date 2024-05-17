@@ -1,11 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 const Menu = () => {
   return (
     <nav className="navbar">
       <NavLink
         className={({ isActive, isPending }) =>
-          isActive ? "active" : isPending ? "pending" : ""
+          isActive ? 'active' : isPending ? 'pending' : ''
         }
         to={``}
       >
@@ -16,7 +16,7 @@ const Menu = () => {
       </NavLink>
       <NavLink
         className={({ isActive, isPending }) =>
-          isActive ? "active" : isPending ? "pending" : ""
+          isActive ? 'active' : isPending ? 'pending' : ''
         }
         to={``}
       >
@@ -27,7 +27,7 @@ const Menu = () => {
       </NavLink>
       <NavLink
         className={({ isActive, isPending }) =>
-          isActive ? "active" : isPending ? "pending" : ""
+          isActive ? 'active' : isPending ? 'pending' : ''
         }
         to={``}
       >
