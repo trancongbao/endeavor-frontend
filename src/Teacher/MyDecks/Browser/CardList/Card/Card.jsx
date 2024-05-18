@@ -1,37 +1,36 @@
 import './Card.scss';
 import { boldNewWord } from '../../../../../Common/Utils';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import { rpc } from '../../../../../rpc/rpc';
 
 export default function Card({ card }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [isNewWord, setIsNewWord] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
-  const inputRef = useRef(null);
-
+  const [suggestedWords, setSuggestedWords] = useState([]);
+  const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [isAddingCard, setIsAddingCard] = useState(false);
   const handleEditBtnClick = (event) => {
     setIsEditing(!isEditing);
   };
+
   const handleDoubleClick = (event) => {
-    setIsNewWord(!isNewWord);
+    const word = window.getSelection().toString().trim();
 
-    const input = inputRef.current;
-    if (!input) return;
+    rpc('teach', 'searchWord', { searchTerm: word }).then((result) => {
+      setSuggestedWords(result);
+    });
 
-    const text = input.value;
-    const start = input.selectionStart;
-    const end = input.selectionEnd;
+    setPopupPosition({
+      x: event.clientX + 30,
+      y: event.clientY + 30,
+    });
+    setPopupVisible(true);
+  };
 
-    if (start !== end) {
-      const before = text.slice(0, start).lastIndexOf(' ') + 1;
-      const after = text.indexOf(' ', start);
-      let word = text.slice(before, after === -1 ? undefined : after);
-
-      word = word.replaceAll('#', '');
-      console.log('Double-clicked word:', word);
-
-      // TODO: call api to suggest word
-    }
+  const handleClickOutside = () => {
+    setPopupVisible(false);
   };
 
   const handleDragStart = (e, item) => {
@@ -47,12 +46,16 @@ export default function Card({ card }) {
     e.preventDefault();
   };
 
+  const togglePopup = () => {
+    setIsAddingCard(!isAddingCard);
+  };
+
   const handleDrop = (e, targetItem) => {
     // TODO: https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/
   };
 
   return (
-    <section className="edit-place">
+    <section className="edit-place" onClick={handleClickOutside}>
       <div className="btns">
         <button
           className="inline-btn edit-card-btn"
@@ -60,13 +63,6 @@ export default function Card({ card }) {
         >
           {isEditing ? 'Preview' : 'Edit'}
         </button>
-        {isNewWord ? (
-          <button className="inline-btn mark-new-word-btn">
-            Mark as new word
-          </button>
-        ) : (
-          ''
-        )}
       </div>
       <h2>↓ Front </h2>
       {isEditing ? (
@@ -74,7 +70,6 @@ export default function Card({ card }) {
           className="front-section"
           type="text"
           value={card.text}
-          ref={inputRef}
           onChange={() => {}}
           onDoubleClick={handleDoubleClick}
         />
@@ -85,6 +80,22 @@ export default function Card({ card }) {
             __html: card ? boldNewWord(card.text) : '',
           }}
         ></div>
+      )}
+      {/* POPUP WORD SUGGESTIONS */}
+      {popupVisible && (
+        <div
+          className="popup"
+          style={{ top: popupPosition.y, left: popupPosition.x }}
+        >
+          <ul>
+            {suggestedWords &&
+              suggestedWords.map((word, index) => (
+                <li key={index}>
+                  {word.word} :: {word.definition}
+                </li>
+              ))}
+          </ul>
+        </div>
       )}
       <h2>↓ Back </h2>
       {card
@@ -108,6 +119,28 @@ export default function Card({ card }) {
             </div>
           ))
         : ''}
+      {isEditing ? (
+        <>
+          <button className="inline-btn edit-card-btn" onClick={togglePopup}>
+            Add word
+          </button>
+        </>
+      ) : (
+        ''
+      )}
+      {isAddingCard && (
+        <div className="popup-overlay" onClick={togglePopup}>
+          <div className="popup" onClick={(e) => e.stopPropagation()}>
+            <label htmlFor="word">Word</label>
+            <input id="word" type="text"></input>
+            <label htmlFor="definition">Definition</label>
+            <input id="definition" type="text"></input>
+            <button onClick={togglePopup} className="close-popup-button">
+              Close Popup
+            </button>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
