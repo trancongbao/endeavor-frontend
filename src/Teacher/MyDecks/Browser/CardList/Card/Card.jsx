@@ -1,10 +1,12 @@
 import './Card.scss';
 import { boldNewWord } from '../../../../../Common/Utils';
 import { useRef, useState } from 'react';
+import { RiDeleteBinLine } from 'react-icons/ri';
 
 export default function Card({ card }) {
   const [isEditing, setIsEditing] = useState(false);
   const [isNewWord, setIsNewWord] = useState(false);
+  const [draggingItem, setDraggingItem] = useState(null);
   const inputRef = useRef(null);
 
   const handleEditBtnClick = (event) => {
@@ -31,6 +33,24 @@ export default function Card({ card }) {
       // TODO: call api to suggest word
     }
   };
+
+  const handleDragStart = (e, item) => {
+    setDraggingItem(item);
+    e.dataTransfer.setData('text/plain', '');
+  };
+
+  const handleDragEnd = () => {
+    setDraggingItem(null);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e, targetItem) => {
+    // TODO: https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/
+  };
+
   return (
     <section className="edit-place">
       <div className="btns">
@@ -67,18 +87,27 @@ export default function Card({ card }) {
         ></div>
       )}
       <h2>↓ Back </h2>
-      <div className="back-section">
-        {card
-          ? card.words.map((word, index) => {
-              return (
-                <div key={index} className="word-line">
-                  <span className="word bold-text">{word.word_word} </span>
-                  <span className="definition">:: {word.word_definition}</span>
-                </div>
-              );
-            })
-          : ''}
-      </div>
+      {card
+        ? card.words.map((item, index) => (
+            <div
+              key={item.id}
+              className={`back-section item ${
+                item === draggingItem ? 'dragging' : ''
+              }`}
+              draggable="true"
+              onDragStart={(e) => handleDragStart(e, item)}
+              onDragEnd={handleDragEnd}
+              onDragOver={handleDragOver}
+              onDrop={(e) => handleDrop(e, item)}
+            >
+              <div>
+                <span className="word bold-text">{item.word_word} </span>
+                <span className="definition">:: {item.word_definition}</span>
+              </div>
+              <RiDeleteBinLine />
+            </div>
+          ))
+        : ''}
     </section>
   );
 }
