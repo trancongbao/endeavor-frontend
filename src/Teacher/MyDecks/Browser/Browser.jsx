@@ -17,7 +17,7 @@ export default function Browser() {
       const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0);
       setSelectedSubdeck(firstSubdeck);
     });
-  }, []);
+  }, [deckId]);
 
   return (
     <div className="browser">
