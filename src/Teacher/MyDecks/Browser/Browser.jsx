@@ -22,7 +22,7 @@ export default function Browser() {
   return (
     <div className="browser">
       <section className="deck-list">
-        <div className="margin-block"></div>
+        <button className="inline-btn add-sub-deck-btn">Add sub deck</button>
         <ul>
           {subdecks.map((subdeck) => (
             <li
