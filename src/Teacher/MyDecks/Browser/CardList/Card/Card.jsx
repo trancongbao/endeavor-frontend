@@ -1,9 +1,9 @@
 import './Card.scss';
-import { boldNewWord } from '../../../../../Common/Utils';
 import { useState } from 'react';
-import { RiDeleteBinLine } from 'react-icons/ri';
 import { rpc } from '../../../../../rpc/rpc';
-
+import Front from './Front/Front';
+import Back from './Back/Back';
+import AddWord from './AddWord/AddWord';
 export default function Card({ card }) {
   const [isEditing, setIsEditing] = useState(false);
   const [draggingItem, setDraggingItem] = useState(null);
@@ -11,6 +11,24 @@ export default function Card({ card }) {
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 });
   const [popupVisible, setPopupVisible] = useState(false);
   const [isAddingCard, setIsAddingCard] = useState(false);
+
+  const addWordsToCard = (word) => {
+    rpc('teach', 'addWordsToCard', {
+      card_id: card.id,
+      words: [{ id: word.id, order: card.words.length + 1 }],
+    });
+
+    // update card word after adding words
+    // update front text, add ## to new word added
+    // create word, id is not auto increament yet
+  };
+
+  const createNewWordForCard = (word) => {
+    rpc('teach', 'createWord', word).then((result) => {
+      addWordsToCard(result);
+    });
+  };
+
   const handleEditBtnClick = (event) => {
     setIsEditing(!isEditing);
   };
@@ -23,8 +41,8 @@ export default function Card({ card }) {
     });
 
     setPopupPosition({
-      x: event.clientX + 30,
-      y: event.clientY + 30,
+      x: event.clientX / 1.5 + 200,
+      y: event.clientY / 1.5 + 100,
     });
     setPopupVisible(true);
   };
@@ -58,70 +76,34 @@ export default function Card({ card }) {
     <section className="edit-place" onClick={handleClickOutside}>
       <div className="btns">
         <button
-          className="inline-btn edit-card-btn"
+          className={`inline-btn ${!isEditing ? 'edit-card-btn' : 'preview-card-btn'}`}
           onClick={() => handleEditBtnClick()}
         >
           {isEditing ? 'Preview' : 'Edit'}
         </button>
       </div>
-      <h2>↓ Front </h2>
-      {isEditing ? (
-        <input
-          className="front-section"
-          type="text"
-          value={card.text}
-          onChange={() => {}}
-          onDoubleClick={handleDoubleClick}
-        />
-      ) : (
-        <div
-          className="front-section"
-          dangerouslySetInnerHTML={{
-            __html: card ? boldNewWord(card.text) : '',
-          }}
-        ></div>
-      )}
-      {/* POPUP WORD SUGGESTIONS */}
-      {popupVisible && (
-        <div
-          className="popup"
-          style={{ top: popupPosition.y, left: popupPosition.x }}
-        >
-          <ul>
-            {suggestedWords &&
-              suggestedWords.map((word, index) => (
-                <li key={index}>
-                  {word.word} :: {word.definition}
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
-      <h2>↓ Back </h2>
-      {card
-        ? card.words.map((item, index) => (
-            <div
-              key={item.id}
-              className={`back-section item ${
-                item === draggingItem ? 'dragging' : ''
-              }`}
-              draggable="true"
-              onDragStart={(e) => handleDragStart(e, item)}
-              onDragEnd={handleDragEnd}
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, item)}
-            >
-              <div>
-                <span className="word bold-text">{item.word_word} </span>
-                <span className="definition">:: {item.word_definition}</span>
-              </div>
-              <RiDeleteBinLine />
-            </div>
-          ))
-        : ''}
+      <Front
+        isEditing={isEditing}
+        card={card}
+        popupVisible={popupVisible}
+        popupPosition={popupPosition}
+        suggestedWords={suggestedWords}
+        handleDoubleClick={handleDoubleClick}
+        addWordsToCard={addWordsToCard}
+      />
+      <hr></hr>
+      <Back
+        isEditing={isEditing}
+        card={card}
+        draggingItem={draggingItem}
+        handleDragEnd={handleDragEnd}
+        handleDragOver={handleDragOver}
+        handleDragStart={handleDragStart}
+        handleDrop={handleDrop}
+      />
       {isEditing ? (
         <>
-          <button className="inline-btn edit-card-btn" onClick={togglePopup}>
+          <button className="inline-btn" onClick={togglePopup}>
             Add word
           </button>
         </>
@@ -129,17 +111,10 @@ export default function Card({ card }) {
         ''
       )}
       {isAddingCard && (
-        <div className="popup-overlay" onClick={togglePopup}>
-          <div className="popup" onClick={(e) => e.stopPropagation()}>
-            <label htmlFor="word">Word</label>
-            <input id="word" type="text"></input>
-            <label htmlFor="definition">Definition</label>
-            <input id="definition" type="text"></input>
-            <button onClick={togglePopup} className="close-popup-button">
-              Close Popup
-            </button>
-          </div>
-        </div>
+        <AddWord
+          togglePopup={togglePopup}
+          createNewWordForCard={createNewWordForCard}
+        />
       )}
     </section>
   );
