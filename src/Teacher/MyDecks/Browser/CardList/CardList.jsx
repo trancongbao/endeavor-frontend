@@ -14,9 +14,9 @@ export default function CardList({ deckId, selectedSubdeck }) {
       courseId: 1,
       lessonId: selectedSubdeck.id,
     }).then((rows) => {
-      console.log(JSON.stringify(rows));
+      console.log("rows:", rows);
       const cards = lodash.groupBy(rows, 'card_order');
-      console.log('grouped: ', cards);
+      console.log('cards: ', cards);
       setCards(cards);
       //Select the first card
       const minCardOrder = lodash.min(Object.keys(cards).map(Number));
@@ -32,12 +32,12 @@ export default function CardList({ deckId, selectedSubdeck }) {
       <section className="card-list">
         <button className="inline-btn add-card-btn">Add Card</button>
         <ul>
-          {cards.map((card) => (
+          {Object.keys(cards).map((cardOrder) => (
             <li
-              className={card === selectedCard ? 'selected' : ''}
-              key={card.id}
-              onClick={() => setSelectedCard(card)}
-              dangerouslySetInnerHTML={{ __html: boldNewWord(card.text) }}
+              className={cardOrder === selectedCard.card_order ? 'selected' : ''}
+              key={cardOrder}
+              onClick={() => setSelectedCard(cards[cardOrder])}
+              dangerouslySetInnerHTML={{ __html: boldNewWord(cards[cardOrder].card_text) }}
             ></li>
           ))}
         </ul>

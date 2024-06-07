@@ -1,5 +1,6 @@
 import { boldNewWord } from '../../../../../../Common/Utils';
 const Front = (props) => {
+  console.log("card: ", props.card)
   return (
     <>
       {props.isEditing ? <h2>Text</h2> : ''}
@@ -8,7 +9,7 @@ const Front = (props) => {
         <input
           className="front-section"
           type="text"
-          value={props.card.text}
+          value={props.card[0].text}
           onChange={() => {}}
           onDoubleClick={props.handleDoubleClick}
         />
@@ -16,7 +17,7 @@ const Front = (props) => {
         <div
           className="front-section"
           dangerouslySetInnerHTML={{
-            __html: props.card ? boldNewWord(props.card.text) : '',
+            __html: props.card ? boldNewWord(props.card[0].text) : '',
           }}
         ></div>
       )}
