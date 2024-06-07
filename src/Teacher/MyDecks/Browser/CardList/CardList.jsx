@@ -37,7 +37,7 @@ export default function CardList({ deckId, selectedSubdeck }) {
               className={cardOrder === selectedCard.card_order ? 'selected' : ''}
               key={cardOrder}
               onClick={() => setSelectedCard(cards[cardOrder])}
-              dangerouslySetInnerHTML={{ __html: boldNewWord(cards[cardOrder].card_text) }}
+              dangerouslySetInnerHTML={{ __html: boldNewWord(cards[cardOrder][0].card_text) }}
             ></li>
           ))}
         </ul>
