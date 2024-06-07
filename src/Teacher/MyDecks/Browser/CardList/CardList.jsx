@@ -15,11 +15,14 @@ export default function CardList({ deckId, selectedSubdeck }) {
       lessonId: selectedSubdeck.id,
     }).then((rows) => {
       console.log(JSON.stringify(rows));
-      const cards = lodash.groupBy(rows, 'card_id');
+      const cards = lodash.groupBy(rows, 'card_order');
       console.log('grouped: ', cards);
       setCards(cards);
       //Select the first card
-      const firstCard = cards.find((card) => card.card_order === 0);
+      const minCardOrder = lodash.min(Object.keys(cards).map(Number));
+      console.log("minCardOrder", minCardOrder)
+      const firstCard = cards[minCardOrder]
+      console.log("firstCard", firstCard)
       firstCard && setSelectedCard(firstCard);
     });
   }, []);
