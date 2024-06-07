@@ -11,7 +11,7 @@ export default function CardList({ deckId, selectedSubdeck }) {
 
   useEffect(() => {
     rpc('teach', 'getCards', {
-      courseId: 1,
+      courseId: deckId,
       lessonId: selectedSubdeck.id,
     }).then((rows) => {
       const cards = lodash.groupBy(rows, 'card_order')
