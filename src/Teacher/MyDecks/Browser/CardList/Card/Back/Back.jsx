@@ -5,21 +5,21 @@ const Back = (props) => {
     <>
       {props.isEditing ? <h2>Words</h2> : ''}
       {props.card
-        ? props.card.words.map((item, index) => (
+        ? props.card.map((word, index) => (
             <div
               key={index}
               className={`back-section item ${
-                item === props.draggingItem ? 'dragging' : ''
+                word === props.draggingItem ? 'dragging' : ''
               }`}
               draggable="true"
-              onDragStart={(e) => props.handleDragStart(e, item)}
+              onDragStart={(e) => props.handleDragStart(e, word)}
               onDragEnd={props.handleDragEnd}
               onDragOver={props.handleDragOver}
-              onDrop={(e) => props.handleDrop(e, item)}
+              onDrop={(e) => props.handleDrop(e, word)}
             >
               <div>
-                <span className="word bold-text">{item.word_word} </span>
-                <span className="definition">:: {item.word_definition}</span>
+                <span className="word bold-text">{word.word_word} </span>
+                <span className="definition">:: {word.word_definition}</span>
               </div>
               {props.isEditing ? <RiDeleteBinLine /> : ''}
             </div>

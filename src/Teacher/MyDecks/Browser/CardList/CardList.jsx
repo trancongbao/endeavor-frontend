@@ -1,37 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import Card from './Card/Card';
-import './CardList.scss';
-import { rpc } from '../../../../rpc/rpc';
-import { boldNewWord } from '../../../../Common/Utils';
-export default function CardList({ selectedSubdeck }) {
-  const [cards, setCards] = useState([]);
-  const [selectedCard, setSelectedCard] = useState(null);
+import React, { useEffect, useState } from 'react'
+import Card from './Card/Card'
+import './CardList.scss'
+import { rpc } from '../../../../rpc/rpc'
+import { boldNewWord } from '../../../../Common/Utils'
+import lodash from 'lodash'
+
+export default function CardList({ deckId, selectedSubdeck }) {
+  const [cards, setCards] = useState([])
+  const [selectedCard, setSelectedCard] = useState(null)
 
   useEffect(() => {
-    rpc('teach', 'getCards', { id: selectedSubdeck.id }).then((cards) => {
-      setCards(cards);
+    if (!selectedSubdeck || !selectedSubdeck.id) return
+    rpc('teach', 'getCards', {
+      courseId: deckId,
+      lessonId: selectedSubdeck.id,
+    }).then((rows) => {
+      const cards = lodash.groupBy(rows, 'card_order')
+      setCards(cards)
       //Select the first card
-      const firstCard = cards.find((card) => card.order === 0);
-      firstCard && setSelectedCard(firstCard);
-    });
-  }, []);
+      const minCardOrder = lodash.min(Object.keys(cards).map(Number))
+      const firstCard = cards[minCardOrder]
+      firstCard && setSelectedCard(firstCard)
+    })
+  }, [deckId, selectedSubdeck])
 
   return (
     <div className="card-area">
       <section className="card-list">
         <button className="inline-btn add-card-btn">Add Card</button>
         <ul>
-          {cards.map((card) => (
+          {Object.keys(cards).map((cardOrder) => (
             <li
-              className={card === selectedCard ? 'selected' : ''}
-              key={card.id}
-              onClick={() => setSelectedCard(card)}
-              dangerouslySetInnerHTML={{ __html: boldNewWord(card.text) }}
+              className={
+                cardOrder === selectedCard.card_order ? 'selected' : ''
+              }
+              key={cardOrder}
+              onClick={() => setSelectedCard(cards[cardOrder])}
+              dangerouslySetInnerHTML={{
+                __html: boldNewWord(cards[cardOrder][0].card_text),
+              }}
             ></li>
           ))}
         </ul>
       </section>
       <Card card={selectedCard} />
     </div>
-  );
+  )
 }

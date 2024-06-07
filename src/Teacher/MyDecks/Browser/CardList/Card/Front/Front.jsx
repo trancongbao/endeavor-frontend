@@ -1,4 +1,5 @@
-import { boldNewWord } from '../../../../../../Common/Utils';
+import { boldNewWord } from '../../../../../../Common/Utils'
+
 const Front = (props) => {
   return (
     <>
@@ -8,7 +9,7 @@ const Front = (props) => {
         <input
           className="front-section"
           type="text"
-          value={props.card.text}
+          value={props.card[0].text}
           onChange={() => {}}
           onDoubleClick={props.handleDoubleClick}
         />
@@ -16,7 +17,7 @@ const Front = (props) => {
         <div
           className="front-section"
           dangerouslySetInnerHTML={{
-            __html: props.card ? boldNewWord(props.card.text) : '',
+            __html: props.card ? boldNewWord(props.card[0].card_text) : '',
           }}
         ></div>
       )}
@@ -32,8 +33,8 @@ const Front = (props) => {
                 <li
                   key={index}
                   onClick={(event) => {
-                    event.preventDefault();
-                    props.addWordsToCard(word);
+                    event.preventDefault()
+                    props.addWordsToCard(word)
                   }}
                 >
                   {word.word} :: {word.definition}
@@ -43,6 +44,6 @@ const Front = (props) => {
         </div>
       )}
     </>
-  );
-};
-export default Front;
+  )
+}
+export default Front
