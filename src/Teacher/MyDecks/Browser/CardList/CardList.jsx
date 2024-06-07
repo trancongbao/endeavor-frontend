@@ -3,12 +3,16 @@ import Card from './Card/Card';
 import './CardList.scss';
 import { rpc } from '../../../../rpc/rpc';
 import { boldNewWord } from '../../../../Common/Utils';
-export default function CardList({ selectedSubdeck }) {
+export default function CardList({ deckId, selectedSubdeck }) {
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
-    rpc('teach', 'getCards', { id: selectedSubdeck.id }).then((cards) => {
+    rpc('teach', 'getCards', {
+      courseId: 1,
+      lessonId: selectedSubdeck.id,
+    }).then((cards) => {
+      console.log(JSON.stringify(cards))
       setCards(cards);
       //Select the first card
       const firstCard = cards.find((card) => card.order === 0);
