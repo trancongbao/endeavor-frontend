@@ -3,6 +3,8 @@ import Card from './Card/Card';
 import './CardList.scss';
 import { rpc } from '../../../../rpc/rpc';
 import { boldNewWord } from '../../../../Common/Utils';
+import lodash from 'lodash';
+
 export default function CardList({ deckId, selectedSubdeck }) {
   const [cards, setCards] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
@@ -11,8 +13,14 @@ export default function CardList({ deckId, selectedSubdeck }) {
     rpc('teach', 'getCards', {
       courseId: 1,
       lessonId: selectedSubdeck.id,
-    }).then((cards) => {
-      console.log(JSON.stringify(cards))
+    }).then((rows) => {
+      console.log(JSON.stringify(rows))
+
+      const grouped = lodash.groupBy(rows, "card_id")
+
+      console.log("grouped: ", grouped)
+
+
       setCards(cards);
       //Select the first card
       const firstCard = cards.find((card) => card.order === 0);
