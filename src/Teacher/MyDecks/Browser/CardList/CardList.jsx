@@ -10,6 +10,7 @@ export default function CardList({ deckId, selectedSubdeck }) {
   const [selectedCard, setSelectedCard] = useState(null)
 
   useEffect(() => {
+    if (!selectedSubdeck || !selectedSubdeck.id) return
     rpc('teach', 'getCards', {
       courseId: deckId,
       lessonId: selectedSubdeck.id,
@@ -21,7 +22,7 @@ export default function CardList({ deckId, selectedSubdeck }) {
       const firstCard = cards[minCardOrder]
       firstCard && setSelectedCard(firstCard)
     })
-  }, [])
+  }, [deckId, selectedSubdeck])
 
   return (
     <div className="card-area">
