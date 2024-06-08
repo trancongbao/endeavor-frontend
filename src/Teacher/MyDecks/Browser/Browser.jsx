@@ -1,23 +1,26 @@
-import { useEffect, useState } from 'react';
-import './Browser.scss';
-import { rpc } from '../../../rpc/rpc';
-import { useParams } from 'react-router-dom';
-import CardList from './CardList/CardList';
+import { useEffect, useState } from 'react'
+import './Browser.scss'
+import { rpc } from '../../../rpc/rpc'
+import { useParams } from 'react-router-dom'
+import CardList from './CardList/CardList'
+import lodash from 'lodash'
 
 export default function Browser() {
-  const { deckId } = useParams();
+  const { deckId } = useParams()
 
-  const [subdecks, setSubdecks] = useState([]);
-  const [selectedSubdeck, setSelectedSubdeck] = useState(null);
+  const [subdecks, setSubdecks] = useState([])
+  const [selectedSubdeck, setSelectedSubdeck] = useState(null)
 
   useEffect(() => {
-    rpc('teach', 'getSubdecks', { id: deckId }).then((subdecks) => {
-      setSubdecks(subdecks);
+    rpc('teach', 'getSubdecks', { deckId: deckId }).then((rows) => {
+      const subdecks = lodash.groupBy(rows, 'subdeck_order')
+      setSubdecks(subdecks)
       //Select the first subdeck
-      const firstSubdeck = subdecks.find((subdeck) => subdeck.order === 0);
-      setSelectedSubdeck(firstSubdeck);
-    });
-  }, [deckId]);
+      const minSubdeckOrder = lodash.min(Object.keys(subdecks).map(Number))
+      const firstSubdeck = subdecks[minSubdeckOrder]
+      firstSubdeck && setSelectedSubdeck(firstSubdeck)
+    })
+  }, [deckId])
 
   return (
     <div className="browser">
@@ -37,7 +40,9 @@ export default function Browser() {
       </section>
 
       {/* Render `CardList` only when `selectedSubdeck` is defined */}
-      {selectedSubdeck && <CardList deckId={deckId} selectedSubdeck={selectedSubdeck} />}
+      {selectedSubdeck && (
+        <CardList deckId={deckId} selectedSubdeck={selectedSubdeck} />
+      )}
     </div>
-  );
+  )
 }
