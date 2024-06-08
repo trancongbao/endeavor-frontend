@@ -13,7 +13,8 @@ export default function Browser() {
 
   useEffect(() => {
     rpc('teach', 'getSubdecks', { deckId: deckId }).then((rows) => {
-      const subdecks = lodash.groupBy(rows, 'subdeck_order')
+      // For a deckId, each subdeck_order must be unique
+      const subdecks = lodash.keyBy(rows, 'subdeck_order')
       setSubdecks(subdecks)
       //Select the subdeck with the lowest order
       const lowestSubdeckOrder = lodash.min(Object.keys(subdecks).map(Number))
