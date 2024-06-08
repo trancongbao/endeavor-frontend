@@ -15,10 +15,9 @@ export default function Browser() {
     rpc('teach', 'getSubdecks', { deckId: deckId }).then((rows) => {
       const subdecks = lodash.groupBy(rows, 'subdeck_order')
       setSubdecks(subdecks)
-      //Select the first subdeck
-      const minSubdeckOrder = lodash.min(Object.keys(subdecks).map(Number))
-      const firstSubdeck = subdecks[minSubdeckOrder]
-      firstSubdeck && setSelectedSubdeck(firstSubdeck)
+      //Select the subdeck with the lowest order
+      const lowestSubdeckOrder = lodash.min(Object.keys(subdecks).map(Number))
+      setSelectedSubdeck(subdecks[lowestSubdeckOrder])
     })
   }, [deckId])
 
@@ -27,22 +26,20 @@ export default function Browser() {
       <section className="deck-list">
         <button className="inline-btn add-sub-deck-btn">Add sub deck</button>
         <ul>
-          {subdecks.map((subdeck) => (
+          {Object.keys(subdecks).map((subdeckOrder) => (
             <li
-              className={subdeck === selectedSubdeck ? 'selected' : ''}
-              key={subdeck.id}
-              onClick={() => setSelectedSubdeck(subdeck)}
+              className={subdeckOrder === selectedSubdeck.subdeck_order ? 'selected' : ''}
+              key={subdeckOrder}
+              onClick={() => setSelectedSubdeck(subdecks[subdeckOrder])}
             >
-              {subdeck.title}
+              {subdecks[subdeckOrder].subdeck_title}
             </li>
           ))}
         </ul>
       </section>
 
       {/* Render `CardList` only when `selectedSubdeck` is defined */}
-      {selectedSubdeck && (
-        <CardList deckId={deckId} selectedSubdeck={selectedSubdeck} />
-      )}
+      {selectedSubdeck && <CardList deckId={deckId} selectedSubdeck={selectedSubdeck} />}
     </div>
   )
 }
