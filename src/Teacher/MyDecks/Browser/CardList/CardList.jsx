@@ -10,10 +10,10 @@ export default function CardList({ deckId, selectedSubdeck }) {
   const [selectedCard, setSelectedCard] = useState(null)
 
   useEffect(() => {
-    if (!selectedSubdeck || !selectedSubdeck.id) return
+    if (!selectedSubdeck || !selectedSubdeck.subdeck_id) return
     rpc('teach', 'getCards', {
       courseId: deckId,
-      lessonId: selectedSubdeck.id,
+      lessonId: selectedSubdeck.subdeck_id,
     }).then((rows) => {
       const cards = lodash.groupBy(rows, 'card_order')
       setCards(cards)
@@ -31,9 +31,7 @@ export default function CardList({ deckId, selectedSubdeck }) {
         <ul>
           {Object.keys(cards).map((cardOrder) => (
             <li
-              className={
-                cardOrder === selectedCard.card_order ? 'selected' : ''
-              }
+              className={cardOrder === selectedCard.card_order ? 'selected' : ''}
               key={cardOrder}
               onClick={() => setSelectedCard(cards[cardOrder])}
               dangerouslySetInnerHTML={{
