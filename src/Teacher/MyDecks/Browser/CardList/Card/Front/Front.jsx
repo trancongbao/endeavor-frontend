@@ -9,7 +9,7 @@ const Front = (props) => {
         <input
           className="front-section"
           type="text"
-          value={props.card[0].text}
+          value={props.card[0].card_text}
           onChange={() => {}}
           onDoubleClick={props.handleDoubleClick}
         />
@@ -23,10 +23,7 @@ const Front = (props) => {
       )}
       {/* POPUP WORD SUGGESTIONS */}
       {props.popupVisible && (
-        <div
-          className="popup"
-          style={{ top: props.popupPosition.y, left: props.popupPosition.x }}
-        >
+        <div className="popup" style={{ top: props.popupPosition.y, left: props.popupPosition.x }}>
           <ul>
             {props.suggestedWords &&
               props.suggestedWords.map((word, index) => (
