@@ -11,7 +11,7 @@ export default function Card({ card }) {
   const [suggestedWords, setSuggestedWords] = useState([])
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 })
   const [popupVisible, setPopupVisible] = useState(false)
-  const [isAddingCard, setIsAddingCard] = useState(false)
+  const [isAddingCardPopUpShown, setIsAddingCardPopUpShown] = useState(false)
 
   const addWordsToCard = (word) => {
     rpc('teach', 'addWordsToCard', {
@@ -58,7 +58,7 @@ export default function Card({ card }) {
   }
 
   const togglePopup = () => {
-    setIsAddingCard(!isAddingCard)
+    setIsAddingCardPopUpShown(!isAddingCardPopUpShown)
   }
 
   const handleDrop = (e, targetItem) => {
@@ -96,14 +96,14 @@ export default function Card({ card }) {
       />
       {isEditing ? (
         <>
-          <button className="inline-btn" onClick={togglePopup}>
+          <button className="inline-btn" onClick={() => setIsAddingCardPopUpShown(true)}>
             Add word
           </button>
         </>
       ) : (
         ''
       )}
-      {isAddingCard && <AddWord togglePopup={togglePopup} createNewWordForCard={createNewWordForCard} />}
+      {isAddingCardPopUpShown && <AddWord togglePopup={togglePopup} createNewWordForCard={createNewWordForCard} />}
     </section>
   )
 }
