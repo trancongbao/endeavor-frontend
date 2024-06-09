@@ -41,7 +41,7 @@ const AddWord = (props) => {
           value={phonetic}
           onChange={(e) => setPhonetic(e.target.value)}
         ></input>
-        <label htmlFor="part_of_speech">PartOfSpeech</label>
+        <label htmlFor="part_of_speech">Part of Speech</label>
         <input
           className="input-field"
           id="part_of_speech"
