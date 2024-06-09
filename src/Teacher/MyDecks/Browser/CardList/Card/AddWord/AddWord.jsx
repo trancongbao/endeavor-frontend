@@ -1,19 +1,11 @@
 import { useState } from 'react'
+import { rpc } from '../../../../../../rpc/rpc'
 
 const AddWord = (props) => {
-  const [word, setWord] = useState('')
+  const [text, setText] = useState('')
   const [definition, setDefinition] = useState('')
   const [phonetic, setPhonetic] = useState('')
   const [partOfSpeech, setPartOfSpeech] = useState('')
-  const handleCreateWord = (event) => {
-    const newWord = {
-      word: word,
-      definition: definition,
-      phonetic: phonetic,
-      partOfSpeech: partOfSpeech,
-    }
-    props.createNewWordForCard(newWord)
-  }
   return (
     <div className="popup-overlay">
       <div className="popup" onClick={(e) => e.stopPropagation()}>
@@ -22,8 +14,8 @@ const AddWord = (props) => {
           className="input-field"
           id="word"
           type="text"
-          value={word}
-          onChange={(e) => setWord(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         ></input>
         <label htmlFor="definition">Definition</label>
         <input
@@ -53,7 +45,19 @@ const AddWord = (props) => {
           <button onClick={props.closeAddWordPopUp} className="popup-button close-button">
             Close
           </button>
-          <button onClick={handleCreateWord} className="popup-button add-button">
+          <button
+            onClick={() => {
+              const word = rpc('teach', 'createWord', {
+                word: text,
+                definition: definition,
+                phonetic: phonetic,
+                part_of_speech: partOfSpeech,
+              })
+              props.addWordToCard(word)
+              props.closeAddWordPopUp()
+            }}
+            className="popup-button add-button"
+          >
             Add Word
           </button>
         </div>

@@ -11,23 +11,15 @@ export default function Card({ card }) {
   const [suggestedWords, setSuggestedWords] = useState([])
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 })
   const [popupVisible, setPopupVisible] = useState(false)
-  const [isAddingCardPopUpShown, setIsAddingCardPopUpShown] = useState(false)
+  const [isAddCardPopUpShown, setIsAddCardPopUpShown] = useState(false)
 
-  const addWordsToCard = (word) => {
+  const addWordToCard = (word) => {
     rpc('teach', 'addWordsToCard', {
       card_id: card.id,
-      words: [{ id: word.id, order: card.words.length + 1 }],
+      words: [{ id: word.id, order: 1 }], //TODO: check if re-ordering is neccessary
     })
 
-    // update card word after adding words
-    // update front text, add ## to new word added
-    // create word, id is not auto increament yet
-  }
-
-  const createNewWordForCard = (word) => {
-    rpc('teach', 'createWord', word).then((result) => {
-      addWordsToCard(result)
-    })
+    // add ## to new word in front text
   }
 
   const handleDoubleClick = (event) => {
@@ -78,7 +70,7 @@ export default function Card({ card }) {
         popupPosition={popupPosition}
         suggestedWords={suggestedWords}
         handleDoubleClick={handleDoubleClick}
-        addWordsToCard={addWordsToCard}
+        addWordsToCard={addWordToCard}
       />
       <hr></hr>
       <Back
@@ -92,15 +84,15 @@ export default function Card({ card }) {
       />
       {isEditing ? (
         <>
-          <button className="inline-btn" onClick={() => setIsAddingCardPopUpShown(true)}>
+          <button className="inline-btn" onClick={() => setIsAddCardPopUpShown(true)}>
             Add word
           </button>
         </>
       ) : (
         ''
       )}
-      {isAddingCardPopUpShown && (
-        <AddWord closeAddWordPopUp={() => setIsAddingCardPopUpShown(false)} createNewWordForCard={createNewWordForCard} />
+      {isAddCardPopUpShown && (
+        <AddWord closeAddWordPopUp={() => setIsAddCardPopUpShown(false)} addWordToCard={addWordToCard} />
       )}
     </section>
   )
