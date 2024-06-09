@@ -15,7 +15,7 @@ const AddWord = (props) => {
     props.createNewWordForCard(newWord);
   };
   return (
-    <div className="popup-overlay" onClick={props.togglePopup}>
+    <div className="popup-overlay">
       <div className="popup" onClick={(e) => e.stopPropagation()}>
         <label htmlFor="word">Word</label>
         <input
@@ -51,7 +51,7 @@ const AddWord = (props) => {
         ></input>
         <div className="popup-buttons">
           <button
-            onClick={props.togglePopup}
+            onClick={props.closeAddWordPopUp}
             className="popup-button close-button"
           >
             Close Popup

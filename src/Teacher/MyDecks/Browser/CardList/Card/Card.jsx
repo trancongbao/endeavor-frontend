@@ -104,7 +104,7 @@ export default function Card({ card }) {
         ''
       )}
       {isAddingCardPopUpShown && (
-        <AddWord togglePopup={() => setIsAddingCardPopUpShown(false)} createNewWordForCard={createNewWordForCard} />
+        <AddWord closeAddWordPopUp={() => setIsAddingCardPopUpShown(false)} createNewWordForCard={createNewWordForCard} />
       )}
     </section>
   )
