@@ -5,15 +5,15 @@ import { rpc } from '../../../../rpc/rpc'
 import { boldNewWord } from '../../../../Common/Utils'
 import lodash from 'lodash'
 
-export default function CardList({ deckId, selectedSubdeck }) {
+export default function CardList({ selectedSubdeck }) {
   const [cards, setCards] = useState([])
   const [selectedCard, setSelectedCard] = useState(null)
 
   useEffect(() => {
-    if (!selectedSubdeck || !selectedSubdeck.id) return
+    if (!selectedSubdeck || !selectedSubdeck.subdeck_id) return
     rpc('teach', 'getCards', {
-      courseId: deckId,
-      lessonId: selectedSubdeck.id,
+      deckId: selectedSubdeck.deck_id,
+      subdeckId: selectedSubdeck.subdeck_id,
     }).then((rows) => {
       const cards = lodash.groupBy(rows, 'card_order')
       setCards(cards)
@@ -22,7 +22,7 @@ export default function CardList({ deckId, selectedSubdeck }) {
       const firstCard = cards[minCardOrder]
       firstCard && setSelectedCard(firstCard)
     })
-  }, [deckId, selectedSubdeck])
+  }, [selectedSubdeck])
 
   return (
     <div className="card-area">
@@ -31,9 +31,7 @@ export default function CardList({ deckId, selectedSubdeck }) {
         <ul>
           {Object.keys(cards).map((cardOrder) => (
             <li
-              className={
-                cardOrder === selectedCard.card_order ? 'selected' : ''
-              }
+              className={cardOrder === selectedCard.card_order ? 'selected' : ''}
               key={cardOrder}
               onClick={() => setSelectedCard(cards[cardOrder])}
               dangerouslySetInnerHTML={{
