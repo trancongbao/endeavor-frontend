@@ -54,7 +54,7 @@ const AddWord = (props) => {
             onClick={props.closeAddWordPopUp}
             className="popup-button close-button"
           >
-            Close Popup
+            Close
           </button>
           <button
             onClick={handleCreateWord}
