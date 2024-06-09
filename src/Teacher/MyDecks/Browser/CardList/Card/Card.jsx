@@ -57,10 +57,6 @@ export default function Card({ card }) {
     e.preventDefault()
   }
 
-  const togglePopup = () => {
-    setIsAddingCardPopUpShown(!isAddingCardPopUpShown)
-  }
-
   const handleDrop = (e, targetItem) => {
     // TODO: https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/
   }
