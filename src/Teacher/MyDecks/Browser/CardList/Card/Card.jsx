@@ -30,10 +30,6 @@ export default function Card({ card }) {
     })
   }
 
-  const handleEditBtnClick = (event) => {
-    setIsEditing(!isEditing)
-  }
-
   const handleDoubleClick = (event) => {
     const word = window.getSelection().toString().trim()
 
@@ -78,9 +74,9 @@ export default function Card({ card }) {
       <div className="btns">
         <button
           className={`inline-btn ${!isEditing ? 'edit-card-btn' : 'preview-card-btn'}`}
-          onClick={() => handleEditBtnClick()}
+          onClick={() => setIsEditing(!isEditing)}
         >
-          {isEditing ? 'Preview' : 'Edit'}
+          {isEditing ? 'Preview Cards' : 'Edit Cards'}
         </button>
       </div>
       <Front
@@ -111,12 +107,7 @@ export default function Card({ card }) {
       ) : (
         ''
       )}
-      {isAddingCard && (
-        <AddWord
-          togglePopup={togglePopup}
-          createNewWordForCard={createNewWordForCard}
-        />
-      )}
+      {isAddingCard && <AddWord togglePopup={togglePopup} createNewWordForCard={createNewWordForCard} />}
     </section>
   )
 }
