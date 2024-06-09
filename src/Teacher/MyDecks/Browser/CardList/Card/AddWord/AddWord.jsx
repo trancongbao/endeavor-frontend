@@ -17,7 +17,7 @@ const AddWord = (props) => {
   return (
     <div className="popup-overlay">
       <div className="popup" onClick={(e) => e.stopPropagation()}>
-        <label htmlFor="word">Word</label>
+        <label htmlFor="word">Text</label>
         <input
           className="input-field"
           id="word"
