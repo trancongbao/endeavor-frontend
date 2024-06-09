@@ -92,7 +92,7 @@ export default function Card({ card }) {
         ''
       )}
       {isAddCardPopUpShown && (
-        <AddWord closeAddWordPopUp={() => setIsAddCardPopUpShown(false)} addWordToCard={addWordToCard} />
+        <AddWord addWordToCard={addWordToCard} closeAddWordPopUp={() => setIsAddCardPopUpShown(false)} />
       )}
     </section>
   )

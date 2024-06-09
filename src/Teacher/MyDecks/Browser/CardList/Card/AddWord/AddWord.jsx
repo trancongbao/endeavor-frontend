@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { rpc } from '../../../../../../rpc/rpc'
 
-const AddWord = (props) => {
+const AddWord = ({addWordToCard, closeAddWordPopUp}) => {
   const [text, setText] = useState('')
   const [definition, setDefinition] = useState('')
   const [phonetic, setPhonetic] = useState('')
@@ -42,7 +42,7 @@ const AddWord = (props) => {
           onChange={(e) => setPartOfSpeech(e.target.value)}
         ></input>
         <div className="popup-buttons">
-          <button onClick={props.closeAddWordPopUp} className="popup-button close-button">
+          <button onClick={closeAddWordPopUp} className="popup-button close-button">
             Close
           </button>
           <button
@@ -53,8 +53,8 @@ const AddWord = (props) => {
                 phonetic: phonetic,
                 part_of_speech: partOfSpeech,
               })
-              props.addWordToCard(word)
-              props.closeAddWordPopUp()
+              addWordToCard(word)
+              closeAddWordPopUp()
             }}
             className="popup-button add-button"
           >
