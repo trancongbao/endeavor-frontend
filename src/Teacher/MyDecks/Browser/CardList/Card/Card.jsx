@@ -44,10 +44,6 @@ export default function Card({ card }) {
     setPopupVisible(true)
   }
 
-  const handleClickOutside = () => {
-    setPopupVisible(false)
-  }
-
   const handleDragStart = (e, item) => {
     setDraggingItem(item)
     e.dataTransfer.setData('text/plain', '')
@@ -70,7 +66,7 @@ export default function Card({ card }) {
   }
 
   return (
-    <section className="edit-place" onClick={handleClickOutside}>
+    <section className="edit-place" onClick={() => setPopupVisible(false)}>
       <div className="btns">
         <button
           className={`inline-btn ${!isEditing ? 'edit-card-btn' : 'preview-card-btn'}`}
