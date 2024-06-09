@@ -11,27 +11,15 @@ export default function Card({ card }) {
   const [suggestedWords, setSuggestedWords] = useState([])
   const [popupPosition, setPopupPosition] = useState({ x: 0, y: 0 })
   const [popupVisible, setPopupVisible] = useState(false)
-  const [isAddingCard, setIsAddingCard] = useState(false)
+  const [isAddCardPopUpShown, setIsAddCardPopUpShown] = useState(false)
 
-  const addWordsToCard = (word) => {
+  const addWordToCard = (word) => {
     rpc('teach', 'addWordsToCard', {
       card_id: card.id,
-      words: [{ id: word.id, order: card.words.length + 1 }],
+      words: [{ id: word.id, order: 1 }], //TODO: check if re-ordering is neccessary
     })
 
-    // update card word after adding words
-    // update front text, add ## to new word added
-    // create word, id is not auto increament yet
-  }
-
-  const createNewWordForCard = (word) => {
-    rpc('teach', 'createWord', word).then((result) => {
-      addWordsToCard(result)
-    })
-  }
-
-  const handleEditBtnClick = (event) => {
-    setIsEditing(!isEditing)
+    // add ## to new word in front text
   }
 
   const handleDoubleClick = (event) => {
@@ -48,10 +36,6 @@ export default function Card({ card }) {
     setPopupVisible(true)
   }
 
-  const handleClickOutside = () => {
-    setPopupVisible(false)
-  }
-
   const handleDragStart = (e, item) => {
     setDraggingItem(item)
     e.dataTransfer.setData('text/plain', '')
@@ -65,22 +49,19 @@ export default function Card({ card }) {
     e.preventDefault()
   }
 
-  const togglePopup = () => {
-    setIsAddingCard(!isAddingCard)
-  }
-
   const handleDrop = (e, targetItem) => {
     // TODO: https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/
   }
 
+  //TODO: isEditing ? CardPreview : CardEdit
   return (
-    <section className="edit-place" onClick={handleClickOutside}>
+    <section className="edit-place" onClick={() => setPopupVisible(false)}>
       <div className="btns">
         <button
           className={`inline-btn ${!isEditing ? 'edit-card-btn' : 'preview-card-btn'}`}
-          onClick={() => handleEditBtnClick()}
+          onClick={() => setIsEditing(!isEditing)}
         >
-          {isEditing ? 'Preview' : 'Edit'}
+          {isEditing ? 'Preview Cards' : 'Edit Cards'}
         </button>
       </div>
       <Front
@@ -90,7 +71,7 @@ export default function Card({ card }) {
         popupPosition={popupPosition}
         suggestedWords={suggestedWords}
         handleDoubleClick={handleDoubleClick}
-        addWordsToCard={addWordsToCard}
+        addWordsToCard={addWordToCard}
       />
       <hr></hr>
       <Back
@@ -104,18 +85,15 @@ export default function Card({ card }) {
       />
       {isEditing ? (
         <>
-          <button className="inline-btn" onClick={togglePopup}>
+          <button className="inline-btn" onClick={() => setIsAddCardPopUpShown(true)}>
             Add word
           </button>
         </>
       ) : (
         ''
       )}
-      {isAddingCard && (
-        <AddWord
-          togglePopup={togglePopup}
-          createNewWordForCard={createNewWordForCard}
-        />
+      {isAddCardPopUpShown && (
+        <AddWord addWordToCard={addWordToCard} closeAddWordPopUp={() => setIsAddCardPopUpShown(false)} />
       )}
     </section>
   )

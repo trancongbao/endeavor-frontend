@@ -1,29 +1,21 @@
-import { useState } from 'react';
+import { useState } from 'react'
+import { rpc } from '../../../../../../rpc/rpc'
 
-const AddWord = (props) => {
-  const [word, setWord] = useState('');
-  const [definition, setDefinition] = useState('');
-  const [phonetic, setPhonetic] = useState('');
-  const [partOfSpeech, setPartOfSpeech] = useState('');
-  const handleCreateWord = (event) => {
-    const newWord = {
-      word: word,
-      definition: definition,
-      phonetic: phonetic,
-      partOfSpeech: partOfSpeech,
-    };
-    props.createNewWordForCard(newWord);
-  };
+const AddWord = ({addWordToCard, closeAddWordPopUp}) => {
+  const [text, setText] = useState('')
+  const [definition, setDefinition] = useState('')
+  const [phonetic, setPhonetic] = useState('')
+  const [partOfSpeech, setPartOfSpeech] = useState('')
   return (
-    <div className="popup-overlay" onClick={props.togglePopup}>
+    <div className="popup-overlay">
       <div className="popup" onClick={(e) => e.stopPropagation()}>
-        <label htmlFor="word">Word</label>
+        <label htmlFor="word">Text</label>
         <input
           className="input-field"
           id="word"
           type="text"
-          value={word}
-          onChange={(e) => setWord(e.target.value)}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
         ></input>
         <label htmlFor="definition">Definition</label>
         <input
@@ -41,7 +33,7 @@ const AddWord = (props) => {
           value={phonetic}
           onChange={(e) => setPhonetic(e.target.value)}
         ></input>
-        <label htmlFor="part_of_speech">PartOfSpeech</label>
+        <label htmlFor="part_of_speech">Part of Speech</label>
         <input
           className="input-field"
           id="part_of_speech"
@@ -50,14 +42,20 @@ const AddWord = (props) => {
           onChange={(e) => setPartOfSpeech(e.target.value)}
         ></input>
         <div className="popup-buttons">
-          <button
-            onClick={props.togglePopup}
-            className="popup-button close-button"
-          >
-            Close Popup
+          <button onClick={closeAddWordPopUp} className="popup-button close-button">
+            Close
           </button>
           <button
-            onClick={handleCreateWord}
+            onClick={() => {
+              const word = rpc('teach', 'createWord', {
+                word: text,
+                definition: definition,
+                phonetic: phonetic,
+                part_of_speech: partOfSpeech,
+              })
+              addWordToCard(word)
+              closeAddWordPopUp()
+            }}
             className="popup-button add-button"
           >
             Add Word
@@ -65,6 +63,6 @@ const AddWord = (props) => {
         </div>
       </div>
     </div>
-  );
-};
-export default AddWord;
+  )
+}
+export default AddWord
