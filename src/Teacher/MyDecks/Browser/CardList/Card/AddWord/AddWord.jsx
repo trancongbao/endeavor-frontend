@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 const AddWord = (props) => {
-  const [word, setWord] = useState('');
-  const [definition, setDefinition] = useState('');
-  const [phonetic, setPhonetic] = useState('');
-  const [partOfSpeech, setPartOfSpeech] = useState('');
+  const [word, setWord] = useState('')
+  const [definition, setDefinition] = useState('')
+  const [phonetic, setPhonetic] = useState('')
+  const [partOfSpeech, setPartOfSpeech] = useState('')
   const handleCreateWord = (event) => {
     const newWord = {
       word: word,
       definition: definition,
       phonetic: phonetic,
       partOfSpeech: partOfSpeech,
-    };
-    props.createNewWordForCard(newWord);
-  };
+    }
+    props.createNewWordForCard(newWord)
+  }
   return (
     <div className="popup-overlay">
       <div className="popup" onClick={(e) => e.stopPropagation()}>
@@ -50,21 +50,15 @@ const AddWord = (props) => {
           onChange={(e) => setPartOfSpeech(e.target.value)}
         ></input>
         <div className="popup-buttons">
-          <button
-            onClick={props.closeAddWordPopUp}
-            className="popup-button close-button"
-          >
+          <button onClick={props.closeAddWordPopUp} className="popup-button close-button">
             Close
           </button>
-          <button
-            onClick={handleCreateWord}
-            className="popup-button add-button"
-          >
+          <button onClick={handleCreateWord} className="popup-button add-button">
             Add Word
           </button>
         </div>
       </div>
     </div>
-  );
-};
-export default AddWord;
+  )
+}
+export default AddWord
