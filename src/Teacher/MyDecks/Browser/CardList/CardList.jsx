@@ -5,14 +5,14 @@ import { rpc } from '../../../../rpc/rpc'
 import { boldNewWord } from '../../../../Common/Utils'
 import lodash from 'lodash'
 
-export default function CardList({ deckId, selectedSubdeck }) {
+export default function CardList({ selectedSubdeck }) {
   const [cards, setCards] = useState([])
   const [selectedCard, setSelectedCard] = useState(null)
 
   useEffect(() => {
     if (!selectedSubdeck || !selectedSubdeck.subdeck_id) return
     rpc('teach', 'getCards', {
-      courseId: deckId,
+      courseId: selectedSubdeck.deck_id,
       lessonId: selectedSubdeck.subdeck_id,
     }).then((rows) => {
       const cards = lodash.groupBy(rows, 'card_order')
@@ -22,7 +22,7 @@ export default function CardList({ deckId, selectedSubdeck }) {
       const firstCard = cards[minCardOrder]
       firstCard && setSelectedCard(firstCard)
     })
-  }, [deckId, selectedSubdeck])
+  }, [selectedSubdeck])
 
   return (
     <div className="card-area">

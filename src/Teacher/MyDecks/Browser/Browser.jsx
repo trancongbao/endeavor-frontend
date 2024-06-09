@@ -40,7 +40,7 @@ export default function Browser() {
       </section>
 
       {/* Render `CardList` only when `selectedSubdeck` is defined */}
-      {selectedSubdeck && <CardList deckId={deckId} selectedSubdeck={selectedSubdeck} />}
+      {selectedSubdeck && <CardList selectedSubdeck={selectedSubdeck} />}
     </div>
   )
 }
