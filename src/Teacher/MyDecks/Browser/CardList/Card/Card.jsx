@@ -68,7 +68,7 @@ export default function Card({ card }) {
         </button>
       </div>
 
-      {isEditing ? <Preview></Preview> : <Edit></Edit>}
+      {isEditing ? <Edit></Edit> : <Preview></Preview>}
 
       {/* <Front
         isEditing={isEditing}
