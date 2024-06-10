@@ -14,9 +14,10 @@ export default function Card({ card }) {
   const [isAddCardPopUpShown, setIsAddCardPopUpShown] = useState(false)
 
   const addWordToCard = (word) => {
-    rpc('teach', 'addWordsToCard', {
+    rpc('teach', 'addWordToCard', {
       card_id: card.id,
-      words: [{ id: word.id, order: 1 }], //TODO: check if re-ordering is neccessary
+      word_id: word.word_id,
+      word_order: 3, //TODO: determine order, re-order if neccessary
     })
 
     // add ## to new word in front text
