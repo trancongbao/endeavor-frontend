@@ -75,6 +75,10 @@ export default function Edit({ card }) {
     //TODO: show Save button
   }
 
+  function onCardTextSelected() {
+    //TODO
+  }
+
   function handleDoubleClick(event) {
     const word = window.getSelection().toString().trim()
 
