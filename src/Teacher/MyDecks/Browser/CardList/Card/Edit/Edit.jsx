@@ -6,6 +6,7 @@ export default function Edit({ card }) {
   const [wordSuggestionsPopupPosition, setwordSuggestionsPopupPosition] = useState({ x: 0, y: 0 })
   const [wordSuggestionsPopupVisible, setWordSuggestionsPopupVisible] = useState(false)
   const [isAddCardPopUpShown, setIsAddCardPopUpShown] = useState(false)
+  const [draggingItem, setDraggingItem] = useState(null)
 
   return (
     <div onClick={() => setWordSuggestionsPopupVisible(false)}>
@@ -61,5 +62,22 @@ export default function Edit({ card }) {
     })
 
     // add ## to new word in front text
+  }
+
+  function handleDragStart(e, item) {
+    setDraggingItem(item)
+    e.dataTransfer.setData('text/plain', '')
+  }
+
+  function handleDragEnd() {
+    setDraggingItem(null)
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault()
+  }
+
+  function handleDrop(e, targetItem) {
+    // TODO: https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/
   }
 }
