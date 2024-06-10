@@ -1,6 +1,8 @@
 import './Card.scss'
 import { useState } from 'react'
 import { rpc } from '../../../../../rpc/rpc'
+import Preview from './Preview/Preview'
+import Edit from './Edit/Edit'
 import Front from './Front/Front'
 import Back from './Back/Back'
 import AddWord from './AddWord/AddWord'
@@ -65,7 +67,10 @@ export default function Card({ card }) {
           {isEditing ? 'Preview Cards' : 'Edit Cards'}
         </button>
       </div>
-      <Front
+
+      {isEditing ? <Preview></Preview> : <Edit></Edit>}
+
+      {/* <Front
         isEditing={isEditing}
         card={card}
         popupVisible={popupVisible}
@@ -95,7 +100,7 @@ export default function Card({ card }) {
       )}
       {isAddCardPopUpShown && (
         <AddWord addWordToCard={addWordToCard} closeAddWordPopUp={() => setIsAddCardPopUpShown(false)} />
-      )}
+      )} */}
     </section>
   )
 }
