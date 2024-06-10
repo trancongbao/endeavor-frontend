@@ -54,10 +54,8 @@ export default function Edit({ card }) {
             onDragOver={handleDragOver}
             onDrop={(e) => handleDrop(e, word)}
           >
-            <div>
-              <span className="word bold-text">{word.word_word} </span>
-              <span className="definition">:: {word.word_definition}</span>
-            </div>
+            <span className="word bold-text">{word.word_word} </span>
+            <span className="definition">:: {word.word_definition}</span>
             <RiDeleteBinLine />
           </div>
         ))}
