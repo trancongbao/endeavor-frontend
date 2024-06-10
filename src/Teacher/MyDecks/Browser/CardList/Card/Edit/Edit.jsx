@@ -4,6 +4,8 @@ import { RiDeleteBinLine } from 'react-icons/ri'
 import AddWord from '../AddWord/AddWord'
 
 export default function Edit({ card }) {
+  const [cardText, setCardText] = useState(card[0].card_text)
+  const [isSaveTextButtonShown, setIsSaveTextButtonShown] = useState(false)
   const [suggestedWords, setSuggestedWords] = useState([])
   const [wordSuggestionsPopupPosition, setwordSuggestionsPopupPosition] = useState({ x: 0, y: 0 })
   const [wordSuggestionsPopupVisible, setWordSuggestionsPopupVisible] = useState(false)
@@ -19,7 +21,7 @@ export default function Edit({ card }) {
         ref={textInputRef}
         className="front-section"
         type="text"
-        value={card[0].card_text}
+        value={cardText}
         onChange={onCardTextChanged}
         onSelect={onCardTextSelected}
       />
@@ -41,6 +43,12 @@ export default function Edit({ card }) {
               ))}
           </ul>
         </div>
+      )}
+
+      {isSaveTextButtonShown && (
+        <button className="inline-btn" onClick={saveText}>
+          Save Text
+        </button>
       )}
 
       <hr></hr>
@@ -73,9 +81,14 @@ export default function Edit({ card }) {
     </div>
   )
 
-  function onCardTextChanged() {
-    //TODO: update cardText state
-    //TODO: show Save button
+  function onCardTextChanged(event) {
+    setCardText(event.target.value)
+    setIsSaveTextButtonShown(true)
+  }
+
+  function saveText() {
+    //TODO: save text
+    setIsSaveTextButtonShown(false)
   }
 
   function onCardTextSelected() {
