@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { rpc } from '../../../../../../rpc/rpc'
+import { RiDeleteBinLine } from 'react-icons/ri'
 
 export default function Edit({ card }) {
   const [suggestedWords, setSuggestedWords] = useState([])
@@ -37,6 +38,26 @@ export default function Edit({ card }) {
           </ul>
         </div>
       )}
+      <hr></hr>
+      <h2>Words</h2>
+      {card &&
+        card.map((word, index) => (
+          <div
+            key={index}
+            className={`back-section item ${word === draggingItem ? 'dragging' : ''}`}
+            draggable="true"
+            onDragStart={(e) => handleDragStart(e, word)}
+            onDragEnd={handleDragEnd}
+            onDragOver={handleDragOver}
+            onDrop={(e) => handleDrop(e, word)}
+          >
+            <div>
+              <span className="word bold-text">{word.word_word} </span>
+              <span className="definition">:: {word.word_definition}</span>
+            </div>
+            <RiDeleteBinLine />
+          </div>
+        ))}
     </div>
   )
 

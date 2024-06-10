@@ -19,16 +19,7 @@ export default function Card({ card }) {
 
       {isEditing ? <Edit card={card}></Edit> : <Preview card={card}></Preview>}
 
-      {/* <Back
-        isEditing={isEditing}
-        card={card}
-        draggingItem={draggingItem}
-        handleDragEnd={handleDragEnd}
-        handleDragOver={handleDragOver}
-        handleDragStart={handleDragStart}
-        handleDrop={handleDrop}
-      />
-      {isEditing ? (
+      {/* {isEditing ? (
         <>
           <button className="inline-btn" onClick={() => setIsAddCardPopUpShown(true)}>
             Add word
