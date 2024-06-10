@@ -56,7 +56,6 @@ export default function Card({ card }) {
     // TODO: https://www.geeksforgeeks.org/drag-and-drop-sortable-list-using-reactjs/
   }
 
-  //TODO: isEditing ? CardPreview : CardEdit
   return (
     <section className="edit-place" onClick={() => setPopupVisible(false)}>
       <div className="btns">
