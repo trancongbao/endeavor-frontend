@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { rpc } from '../../../../../../rpc/rpc'
 import { RiDeleteBinLine } from 'react-icons/ri'
+import AddWord from '../AddWord/AddWord'
 
 export default function Edit({ card }) {
   const [suggestedWords, setSuggestedWords] = useState([])
@@ -16,7 +17,7 @@ export default function Edit({ card }) {
         className="front-section"
         type="text"
         value={card[0].card_text}
-        onChange={() => {}}
+        onChange={onCardTextChanged}
         onDoubleClick={handleDoubleClick}
       />
       {/* Word Suggestions Popup */}
@@ -38,7 +39,9 @@ export default function Edit({ card }) {
           </ul>
         </div>
       )}
+
       <hr></hr>
+
       <h2>Words</h2>
       {card &&
         card.map((word, index) => (
@@ -58,8 +61,21 @@ export default function Edit({ card }) {
             <RiDeleteBinLine />
           </div>
         ))}
+
+      <button className="inline-btn" onClick={() => setIsAddCardPopUpShown(true)}>
+        Add word
+      </button>
+
+      {isAddCardPopUpShown && (
+        <AddWord addWordToCard={addWordToCard} closeAddWordPopUp={() => setIsAddCardPopUpShown(false)} />
+      )}
     </div>
   )
+
+  function onCardTextChanged() {
+    //TODO: update cardText state
+    //TODO: show Save button
+  }
 
   function handleDoubleClick(event) {
     const word = window.getSelection().toString().trim()

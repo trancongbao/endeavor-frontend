@@ -18,19 +18,6 @@ export default function Card({ card }) {
       </div>
 
       {isEditing ? <Edit card={card}></Edit> : <Preview card={card}></Preview>}
-
-      {/* {isEditing ? (
-        <>
-          <button className="inline-btn" onClick={() => setIsAddCardPopUpShown(true)}>
-            Add word
-          </button>
-        </>
-      ) : (
-        ''
-      )}
-      {isAddCardPopUpShown && (
-        <AddWord addWordToCard={addWordToCard} closeAddWordPopUp={() => setIsAddCardPopUpShown(false)} />
-      )} */}
     </section>
   )
 }
