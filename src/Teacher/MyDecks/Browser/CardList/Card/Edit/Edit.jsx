@@ -7,15 +7,13 @@ export default function Edit({ card }) {
   const [cardText, setCardText] = useState(card[0].card_text)
   const [isSaveTextButtonShown, setIsSaveTextButtonShown] = useState(false)
   const [suggestedWords, setSuggestedWords] = useState([])
-  const [wordSuggestionsPopupPosition, setwordSuggestionsPopupPosition] = useState({ x: 0, y: 0 })
-  const [wordSuggestionsPopupVisible, setWordSuggestionsPopupVisible] = useState(false)
   const [isAddCardPopUpShown, setIsAddCardPopUpShown] = useState(false)
   const [draggingItem, setDraggingItem] = useState(null)
 
   const textInputRef = useRef(null)
 
   return (
-    <div onClick={() => setWordSuggestionsPopupVisible(false)}>
+    <div>
       <h2>Text</h2>
       <input
         ref={textInputRef}
@@ -25,26 +23,6 @@ export default function Edit({ card }) {
         onChange={onCardTextChanged}
         onSelect={onCardTextSelected}
       />
-      {/* Word Suggestions Popup */}
-      {wordSuggestionsPopupVisible && (
-        <div className="popup" style={{ top: wordSuggestionsPopupPosition.y, left: wordSuggestionsPopupPosition.x }}>
-          <ul>
-            {suggestedWords &&
-              suggestedWords.map((word, index) => (
-                <li
-                  key={index}
-                  onClick={(event) => {
-                    event.preventDefault()
-                    addWordToCard(word)
-                  }}
-                >
-                  {word.word} :: {word.definition}
-                </li>
-              ))}
-          </ul>
-        </div>
-      )}
-
       {isSaveTextButtonShown && (
         <button className="inline-btn" onClick={onSaveTextButtonClicked}>
           Save Text
@@ -78,6 +56,22 @@ export default function Edit({ card }) {
       {isAddCardPopUpShown && (
         <AddWord addWordToCard={addWordToCard} closeAddWordPopUp={() => setIsAddCardPopUpShown(false)} />
       )}
+
+      {suggestedWords && (
+        <ul>
+          {suggestedWords.map((word, index) => (
+            <li
+              key={index}
+              onClick={(event) => {
+                event.preventDefault()
+                addWordToCard(word)
+              }}
+            >
+              {word.word} :: {word.definition}
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 
@@ -109,20 +103,6 @@ export default function Edit({ card }) {
         setSuggestedWords(result)
       })
     }
-  }
-
-  function handleDoubleClick(event) {
-    const word = window.getSelection().toString().trim()
-
-    rpc('teach', 'searchWord', { searchTerm: word }).then((result) => {
-      setSuggestedWords(result)
-    })
-
-    setwordSuggestionsPopupPosition({
-      x: event.clientX / 1.5 + 200,
-      y: event.clientY / 1.5 + 100,
-    })
-    setWordSuggestionsPopupVisible(true)
   }
 
   function addWordToCard(word) {
