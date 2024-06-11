@@ -1,24 +1,29 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { rpc } from '../../../../../../rpc/rpc'
 import { RiDeleteBinLine } from 'react-icons/ri'
 import AddWord from '../AddWord/AddWord'
 
 export default function Edit({ card }) {
+  const [cardText, setCardText] = useState(card[0].card_text)
+  const [isSaveTextButtonShown, setIsSaveTextButtonShown] = useState(false)
   const [suggestedWords, setSuggestedWords] = useState([])
   const [wordSuggestionsPopupPosition, setwordSuggestionsPopupPosition] = useState({ x: 0, y: 0 })
   const [wordSuggestionsPopupVisible, setWordSuggestionsPopupVisible] = useState(false)
   const [isAddCardPopUpShown, setIsAddCardPopUpShown] = useState(false)
   const [draggingItem, setDraggingItem] = useState(null)
 
+  const textInputRef = useRef(null)
+
   return (
     <div onClick={() => setWordSuggestionsPopupVisible(false)}>
       <h2>Text</h2>
       <input
+        ref={textInputRef}
         className="front-section"
         type="text"
-        value={card[0].card_text}
+        value={cardText}
         onChange={onCardTextChanged}
-        onDoubleClick={handleDoubleClick}
+        onSelect={onCardTextSelected}
       />
       {/* Word Suggestions Popup */}
       {wordSuggestionsPopupVisible && (
@@ -38,6 +43,12 @@ export default function Edit({ card }) {
               ))}
           </ul>
         </div>
+      )}
+
+      {isSaveTextButtonShown && (
+        <button className="inline-btn" onClick={onSaveTextButtonClicked}>
+          Save Text
+        </button>
       )}
 
       <hr></hr>
@@ -70,9 +81,34 @@ export default function Edit({ card }) {
     </div>
   )
 
-  function onCardTextChanged() {
-    //TODO: update cardText state
-    //TODO: show Save button
+  function onCardTextChanged(event) {
+    setCardText(event.target.value)
+    setIsSaveTextButtonShown(true)
+  }
+
+  function onSaveTextButtonClicked() {
+    console.log('card: ', card)
+    rpc('teach', 'updateCardText', {
+      courseId: card[0].course_id,
+      lessonId: card[0].lesson_id,
+      cardId: card[0].card_id,
+      cardText: textInputRef.current.value,
+    }).then((result) => {
+      setIsSaveTextButtonShown(false)
+    })
+  }
+
+  function onCardTextSelected() {
+    const textInput = textInputRef.current
+    const { selectionStart, selectionEnd } = textInput
+    const selection = textInput.value.slice(selectionStart, selectionEnd)
+
+    //onSelect also fires for empty selection
+    if (selectionStart !== selectionEnd) {
+      rpc('teach', 'searchWord', { searchTerm: selection }).then((result) => {
+        setSuggestedWords(result)
+      })
+    }
   }
 
   function handleDoubleClick(event) {
@@ -91,9 +127,9 @@ export default function Edit({ card }) {
 
   function addWordToCard(word) {
     rpc('teach', 'addWordToCard', {
-      card_id: card.id,
-      word_id: word.word_id,
-      word_order: 3, //TODO: determine order, re-order if neccessary
+      cardId: card.id,
+      wordId: word.word_id,
+      wordOrder: 3, //TODO: determine order, re-order if neccessary
     })
 
     // add ## to new word in front text
