@@ -111,20 +111,6 @@ export default function Edit({ card }) {
     }
   }
 
-  function handleDoubleClick(event) {
-    const word = window.getSelection().toString().trim()
-
-    rpc('teach', 'searchWord', { searchTerm: word }).then((result) => {
-      setSuggestedWords(result)
-    })
-
-    setwordSuggestionsPopupPosition({
-      x: event.clientX / 1.5 + 200,
-      y: event.clientY / 1.5 + 100,
-    })
-    setWordSuggestionsPopupVisible(true)
-  }
-
   function addWordToCard(word) {
     rpc('teach', 'addWordToCard', {
       cardId: card.id,
