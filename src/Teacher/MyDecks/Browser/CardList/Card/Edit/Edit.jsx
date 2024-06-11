@@ -46,7 +46,7 @@ export default function Edit({ card }) {
       )}
 
       {isSaveTextButtonShown && (
-        <button className="inline-btn" onClick={saveText}>
+        <button className="inline-btn" onClick={onSaveTextButtonClicked}>
           Save Text
         </button>
       )}
@@ -86,9 +86,16 @@ export default function Edit({ card }) {
     setIsSaveTextButtonShown(true)
   }
 
-  function saveText() {
-    //TODO: save text
-    setIsSaveTextButtonShown(false)
+  function onSaveTextButtonClicked() {
+    console.log('card: ', card)
+    rpc('teach', 'updateCardText', {
+      courseId: card[0].course_id,
+      lessonId: card[0].lesson_id,
+      cardId: card[0].card_id,
+      cardText: textInputRef.current.value,
+    }).then((result) => {
+      setIsSaveTextButtonShown(false)
+    })
   }
 
   function onCardTextSelected() {
@@ -99,7 +106,6 @@ export default function Edit({ card }) {
     //onSelect also fires for empty selection
     if (selectionStart !== selectionEnd) {
       rpc('teach', 'searchWord', { searchTerm: selection }).then((result) => {
-        console.log('result: ', result)
         setSuggestedWords(result)
       })
     }
@@ -121,9 +127,9 @@ export default function Edit({ card }) {
 
   function addWordToCard(word) {
     rpc('teach', 'addWordToCard', {
-      card_id: card.id,
-      word_id: word.word_id,
-      word_order: 3, //TODO: determine order, re-order if neccessary
+      cardId: card.id,
+      wordId: word.word_id,
+      wordOrder: 3, //TODO: determine order, re-order if neccessary
     })
 
     // add ## to new word in front text
